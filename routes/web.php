@@ -13,6 +13,47 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Auth::routes(['register' => false]);
+Auth::routes();
+Route::get('/',function(){
+    if(Auth::check()){
+        $tipo = Auth::user()->tipo;
+        switch ($tipo) {
+            case 1:
+                return redirect('/lider');
+                break;
+            case 2:
+                return redirect('/obreiros');
+                break;
+            case 3:
+                return redirect('/porteiros');
+                break;
+        }
+    }
+    else{
+        return redirect('/login');
+    }
+});
+
+//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+// Rotas para usuário lider
+Route::middleware(['auth','lider'])->prefix('/lider')->group(function(){
+    //_________________VIEWS__________________//
+        Route::get("/lider",[App\Http\Controllers\LiderController::class, 'index']);
+    //_________________DATAS__________________//
+});
+
+
+Route::middleware(['auth','obreiro'])->prefix('/obreiro')->group(function(){
+    //_________________VIEWS__________________//
+        Route::get("/obreiro",[App\Http\Controllers\ObreiroController::class, 'index']);
+    //_________________DATAS__________________//
+});
+
+
+Route::middleware(['auth','porteiro'])->prefix('/porteiro')->group(function(){
+    //_________________VIEWS__________________//
+        Route::get("/porteiro",[App\Http\Controllers\PorteiroController::class, 'index']);
+    //_________________DATAS__________________//
 });
