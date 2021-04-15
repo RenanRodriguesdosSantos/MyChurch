@@ -40,20 +40,20 @@ Route::get('/',function(){
 // Rotas para usuário lider
 Route::middleware(['auth','lider'])->prefix('/lider')->group(function(){
     //_________________VIEWS__________________//
-        Route::get("/lider",[App\Http\Controllers\LiderController::class, 'index']);
+        Route::get("/",[App\Http\Controllers\LiderController::class, 'index']);
     //_________________DATAS__________________//
 });
 
 
 Route::middleware(['auth','obreiro'])->prefix('/obreiro')->group(function(){
     //_________________VIEWS__________________//
-        Route::get("/obreiro",[App\Http\Controllers\ObreiroController::class, 'index']);
+        Route::get("/",[App\Http\Controllers\ObreiroController::class, 'index']);
     //_________________DATAS__________________//
 });
 
 
 Route::middleware(['auth','porteiro'])->prefix('/porteiro')->group(function(){
     //_________________VIEWS__________________//
-        Route::get("/porteiro",[App\Http\Controllers\PorteiroController::class, 'index']);
+        Route::get("/",[App\Http\Controllers\PorteiroController::class, 'index']);
     //_________________DATAS__________________//
 });
