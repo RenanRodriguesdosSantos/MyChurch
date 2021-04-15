@@ -8,8 +8,9 @@
     <link rel="shortcut icon" href="{{ asset('images/logo.png')}}" >
     <script src="{{ asset('js/app.js') }}" defer></script>
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <title>SISUPA</title>
+    <title>My Church</title>
 </head>
 <body>
-    <div id="porteiro"></div>
+    <div id="porteiro">
+    </div>
 </body>
