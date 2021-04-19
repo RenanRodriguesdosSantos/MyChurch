@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\MembresiaController;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,6 +16,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::middleware('auth')->get('/user', function (Request $request) {
+    return Auth::user();
 });
+
+Route::post('cadastro-membresia', [MembresiaController::class, 'store']);
