@@ -3,6 +3,8 @@ import Router from 'vue-router';
 import Home from '../components/Home/Home'
 import FormMembresia from '../components/membresia/FormMembresia'
 import ListarMembresia from '../components/membresia/ListarMembresia';
+import FormUsuario from '../components/usuario/FormUsuario';
+import ListarUsuario from '../components/usuario/ListarUsuario';
 
 Vue.use(Router);
 
@@ -30,6 +32,22 @@ const routes = [
     path: '/membresia/listar',
     name: 'listar-membresia',
     component: ListarMembresia,
+  },
+  {
+    path: '/usuario/cadastro',
+    name: 'cadastro-usuario',
+    component: FormUsuario,
+  },
+  {
+    path: '/usuario/editar/:id',
+    name: 'editar-usuario',
+    component: FormUsuario,
+    props: true,
+  },
+  {
+    path: '/usuario/listar',
+    name: 'listar-usuario',
+    component: ListarUsuario,
   },
 ];
 
