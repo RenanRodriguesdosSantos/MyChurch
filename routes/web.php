@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\MembresiaController;
+use App\Http\Controllers\TiposController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -39,6 +42,15 @@ Route::middleware(['auth'])->group(function(){
             Route::get('get-all-membros', [MembresiaController::class, 'index']);
             Route::get('get-membro', [MembresiaController::class, 'show']);
             Route::post('delete-membro', [MembresiaController::class, 'destroy']);
+        });
+        Route::prefix('user')->group(function () {
+            Route::post('cadastro', [UserController::class, 'store']);
+            Route::get('get-all-users', [UserController::class, 'index']);
+            Route::get('get-user', [UserController::class, 'show']);
+            Route::post('delete-user', [UserController::class, 'destroy']);
+        });
+        Route::prefix('tipos')->group(function () {
+            Route::get('get-all-types', [TiposController::class, 'index']);
         });
 
 

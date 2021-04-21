@@ -33,14 +33,32 @@
                     </v-list-item-content>
                 </v-list-item>
             </v-list-group>
-            </v-list>
-            <template v-slot:append>
-                <v-list-item link @click="logout()">
+            <v-list-group :value="false" no-action prepend-icon="mdi-cogs">
+                <template v-slot:activator>
+                <v-list-item-content>
+                    <v-list-item-title >Usuários</v-list-item-title>
+                </v-list-item-content>
+                </template>
+
+                <v-list-item link @click="goTo('cadastro-usuario')">
                     <v-list-item-content>
-                        <v-list-item-title>Logout</v-list-item-title>
+                        <v-list-item-title>Novo usuário</v-list-item-title>
                     </v-list-item-content>
                 </v-list-item>
-            </template>
+                <v-list-item link @click="goTo('listar-usuario')">
+                    <v-list-item-content>
+                        <v-list-item-title>Lista de usuários</v-list-item-title>
+                    </v-list-item-content>
+                </v-list-item>
+            </v-list-group>
+        </v-list>
+        <template v-slot:append>
+            <v-list-item link @click="logout()">
+                <v-list-item-content>
+                    <v-list-item-title>Logout</v-list-item-title>
+                </v-list-item-content>
+            </v-list-item>
+        </template>
     </v-navigation-drawer>
 </template>
 
