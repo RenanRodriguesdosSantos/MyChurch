@@ -6,7 +6,7 @@
 </template>
 
 <script>
-    import Header from './header.vue';
+    import Header from '../Home/Header.vue';
     export default {
         name: 'obreiro',
         mounted() {
