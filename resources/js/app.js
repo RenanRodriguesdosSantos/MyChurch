@@ -1,48 +1,21 @@
-/**
- * First we will load all of this project's JavaScript dependencies which
- * includes Vue and other libraries. It is a great starting point when
- * building robust, powerful web applications using Vue and Laravel.
- */
+import Vue from 'vue'
+import vuetify from './vuetify';
+import VueToast from 'vue-toast-notification';
+import 'vue-toast-notification/dist/theme-default.css';
 
+window.Vue = Vue;
+import inject from './VueInstanceInject';
 require('./bootstrap');
-window.Vue = require('vue').default;
-require('./lider');
-require('./obreiro');
-require('./porteiro');
-//import VueRouter from 'vue-router';
-//Vue.use(VueRouter);
-/**
- * The following block of code may be used to automatically register your
- * Vue components. It will recursively scan this directory for the Vue
- * components and automatically register them with their "basename".
- *
- * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
- */
+Vue.component('main-component', require('./components/Home/Main.vue').default);
 
-// const files = require.context('./', true, /\.vue$/i)
-// files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
+Vue.use(VueToast, {
+    // One of the options
+    position: 'top-right',
+    pauseOnHover: true
+});
 
-// Vue.component('lider', require('./components/Lider.vue').default);
-// Vue.component('obreiro', require('./components/Obreiro.vue').default);
-// Vue.component('porteiro', require('./components/Porteiro.vue').default);
-// import HomeLider from './components/lider/home.vue';
-
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
-
-// const router = new VueRouter({
-//     routes: [
-//         {
-//             path: "/",
-//             component: HomeLider
-//         }
-//     ]
-// });
-
-// const app = new Vue({
-//     router,
-//     el: '#app',
-// });
+const app = new Vue({
+    el: '#app',
+    ...inject,
+    vuetify
+});
