@@ -9,9 +9,7 @@ class Membresia extends Model
 {
     protected $table = 'membresia';
 
-    protected $fillable = ['nome', 'email', 'nome', 'cpf', 'telefone', 'email', 'databatismo', 'foto'];
-
-    public $timestamps = false;
+    protected $fillable = ['nome', 'email', 'endereco', 'cpf', 'telefone', 'email', 'databatismo', 'foto'];
 
     use HasFactory;
 }

@@ -41,17 +41,10 @@ class MembresiaController extends Controller
         //     $imageName= Carbon::now();
         //     $request->foto->move('images', $imageName);
         // }
-
-        // return 'oi';
-        return Membresia::create([
-            'nome' => $request->nome,
-            'cpf' => $request->cpf,
-            'endereco' => $request->endereco,
-            'telefone' => $request->telefone,
-            'email' => $request->email,
-            'databatismo' => $request->databatismo,
-            'foto' => $request->foto,
-        ]);
+        if($request->id)
+            Membresia::find($request->id)->update($request->all());
+        else
+            Membresia::create($request->all());
     }
 
     /**
