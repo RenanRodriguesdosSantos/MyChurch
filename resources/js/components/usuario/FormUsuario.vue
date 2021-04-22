@@ -34,6 +34,16 @@
                                 outlined
                             ></v-text-field>
                         </v-col>
+                        <v-col lg="6" md="6" sm="12" v-else>
+                            <v-text-field
+                                v-model="user.new_password"
+                                :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+                                :type="show1 ? 'text' : 'password'"
+                                label="Senha (Deixe em branco para não alterar)"
+                                @click:append="show1 = !show1"
+                                outlined
+                            ></v-text-field>
+                        </v-col>
                         <v-col lg="6" md="6" sm="12">
                             <v-select v-model="user.type" outlined :items="tipos" item-text="descricao" item-value="id" filled
                             :rules="[...requiredRule]"
@@ -70,8 +80,9 @@ export default {
             user: {
                 name: null,
                 email: null,
-                type_id: null,
+                type: null,
                 password: null,
+                new_password: null
             },
             password: null,
             show1: false,
@@ -90,6 +101,7 @@ export default {
                 await this.usuarioService.request('POST', 'cadastro', params).then((response) => {
                     this.isLoading = false;
                     if(response.status >= 200 && response.status <= 299) {
+                        this.$router.push('/usuario/listar');
                         Vue.$toast.success('Operação realizada com sucesso');
                     } else {
                         Vue.$toast.error('Ocorreu um problema ao salvar o registro');

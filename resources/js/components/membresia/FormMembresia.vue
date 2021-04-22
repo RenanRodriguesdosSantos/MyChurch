@@ -97,6 +97,7 @@ export default {
                 await this.membresiaService.request('POST', 'cadastro', params).then((response) => {
                     this.isLoading = false;
                     if(response.status >= 200 && response.status <= 299) {
+                        this.$router.push('/membresia/listar');
                         Vue.$toast.success('Operação realizada com sucesso');
                     } else {
                         Vue.$toast.error('Ocorreu um problema ao salvar o registro');

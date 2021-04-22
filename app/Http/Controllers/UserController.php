@@ -36,13 +36,20 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->type_id);
-        return User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'type' => $request->type_id,
-            'password' => Hash::make($request->password),
-        ]);
+        if($request->id)
+            User::find($request->id)->update([
+                'name' => $request->name,
+                'email' => $request->email,
+                'type' => $request->type,
+                'password' => $request->new_password?Hash::make($request->new_password):$request->password
+            ]);
+        else
+            User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'type' => $request->type,
+                'password' => Hash::make($request->password),
+            ]);
     }
 
     /**
