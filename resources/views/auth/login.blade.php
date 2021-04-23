@@ -7,7 +7,7 @@
     <script src="{{ asset('js/app.js') }}" defer></script>
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>My Church</title>
+    <title>My Church - Login</title>
 </head>
 <body style="background: #00ffff">
     <div class="container">
@@ -16,7 +16,7 @@
                 <div class="card">
                     <div class="card-header">{{ __('Login') }}</div>
                     <div class="card-body row">
-                        <div class="col-md-1 text-center"><img class="fluid" src="images/usuario.png"></div>
+                        <div class="col-md-1 text-center"><img class="fluid" src="images/blarg.png" width="200px"></div>
                         <div class="col-md-11">
                             <form method="POST" action="{{ route('login') }}">
                                 @csrf
