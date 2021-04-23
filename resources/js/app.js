@@ -14,8 +14,10 @@ Vue.use(VueToast, {
     pauseOnHover: true
 });
 
-const app = new Vue({
-    el: '#app',
-    ...inject,
-    vuetify
-});
+if(document.getElementById("app")){
+    const app = new Vue({
+        el: '#app',
+        ...inject,
+        vuetify
+    });
+}

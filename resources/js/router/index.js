@@ -53,6 +53,7 @@ const routes = [
 
 const router = new Router({
   routes,
+  mode: 'history'
 });
 
 // // em todas as rotas é verificado autenticação e autorização
