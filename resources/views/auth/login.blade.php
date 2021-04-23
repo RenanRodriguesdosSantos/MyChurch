@@ -16,17 +16,6 @@
 </head>
 <body style="background: #A3CEF1">
     <div class="container">
-
-        <div class="row justify-content-center pt-md-5" >
-            <div class="col-md-6 mt-md-5 shadow-lg bg-light p-md-3 m-4 rounded">
-                <div class="card">
-                    <div class="card-header">{{ __('Login') }}</div>
-                    <div class="card-body row">
-                        <div class="col-md-1 text-center"><img class="fluid" src="images/blarg.png" width="200px"></div>
-                        <div class="col-md-11">
-                            <form method="POST" action="{{ route('login') }}">
-                                @csrf
-
         <div class="row justify-content-center" >
             <div class="col-md-3 shadow-lg bg-light p-md-4 mt-md-5" id="card-login">
                 <img class="img-fluid" src="images/logo.png"/>
