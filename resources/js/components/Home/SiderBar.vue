@@ -7,14 +7,22 @@
             </v-list-item-avatar>
 
             <v-list-item-content>
+
+                <v-list-item-title>{{ $store.user }}</v-list-item-title>
+                <v-list-item-subtitle>Logged In</v-list-item-subtitle>
+
                 <v-list-item-title v-text="currentUser.name"></v-list-item-title>
                 <v-list-item-subtitle v-text="currentUser.tipo.slug"></v-list-item-subtitle>
+
             </v-list-item-content>
             </v-list-item>
         </template>
 
         <v-divider></v-divider>
         <v-list>
+
+            <v-list-group :value="false" no-action prepend-icon="mdi-church">
+
             <v-list-item link @click="goTo('/')" prepend-icon="mdi-cogs">
                     <v-list-item-icon>
                         <v-icon>mdi-home</v-icon>
@@ -24,6 +32,7 @@
                     </v-list-item-content>
             </v-list-item>
             <v-list-group :value="false" no-action prepend-icon="mdi-cogs">
+
                 <template v-slot:activator>
                 <v-list-item-content>
                     <v-list-item-title >Membresia</v-list-item-title>
@@ -41,7 +50,7 @@
                     </v-list-item-content>
                 </v-list-item>
             </v-list-group>
-            <v-list-group :value="false" no-action prepend-icon="mdi-cogs">
+            <v-list-group :value="false" no-action prepend-icon="mdi-account">
                 <template v-slot:activator>
                 <v-list-item-content>
                     <v-list-item-title >Usuários</v-list-item-title>
