@@ -9,6 +9,7 @@ import store from '../../store';
  */
 const beforeEach = (to, from, next) => {
   const user = store.state.currentUser;
+  console.log(user);
   // Verifica se a rota requer autenticação ou algum perfil especifico
   // se requerer o usuário deverá estar logado para continuar a rota
   if (to.meta.requiresAuth && !user) {

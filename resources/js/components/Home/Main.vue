@@ -14,7 +14,7 @@ export default {
     props: ['user'],
     components: { SiderBar },
     name: 'main-component',
-    mounted() {
+    created() {
         this.$store.dispatch('updateCurrentUser', JSON.parse(this.user));
     }
 }

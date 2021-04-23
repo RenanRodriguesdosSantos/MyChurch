@@ -19,15 +19,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 Auth::routes(['register' => true]);
-// Auth::routes();
-// Route::get('/',function(){
-//     return view('home');
-// });
-// Route::get('/home',function(){
-//     return view('home');
-// });
-
-
 
 Route::middleware(['auth'])->group(function(){
 
@@ -52,23 +43,4 @@ Route::middleware(['auth'])->group(function(){
         Route::prefix('tipos')->group(function () {
             Route::get('get-all-types', [TiposController::class, 'index']);
         });
-
-
-
 });
-
-
-
-
-// Route::middleware(['auth','obreiro'])->prefix('/obreiro')->group(function(){
-
-//         Route::get("/",[App\Http\Controllers\ObreiroController::class, 'index']);
-
-// });
-
-
-// Route::middleware(['auth','porteiro'])->prefix('/porteiro')->group(function(){
-
-//         Route::get("/",[App\Http\Controllers\PorteiroController::class, 'index']);
-
-// });
