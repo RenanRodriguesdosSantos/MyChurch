@@ -9,54 +9,50 @@
             ></v-progress-circular>
             </v-overlay>
            <v-row class="mb-6">
-            <v-col lg="12" md="12" sm="12">
+            <v-col lg="12" md="12" xs="12">
                 <h3>Cadastro de usuários</h3>
             </v-col>
           </v-row>
           <v-form ref="userForm">
-            <v-row class="text-lg-center">
-                <v-col lg="12" md="12" sm="12">
-                    <v-row class="text-lg-center" >
-                        <v-col lg="6" md="6" sm="12">
-                            <v-text-field label="Nome completo" v-model="user.name" outlined :rules="[...lengthRule, ...requiredRule]"></v-text-field>
-                        </v-col>
-                        <v-col lg="6" md="6" sm="12">
-                            <v-text-field label="Email" type="text" v-model="user.email" outlined :rules="[...requiredRule, ...emailRule]" ></v-text-field>
-                        </v-col>
-                        <v-col lg="6" md="6" sm="12" v-if="!id">
-                            <v-text-field
-                                v-model="user.password"
-                                :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
-                                :rules="[...requiredRule, ...lengthRule]"
-                                :type="show1 ? 'text' : 'password'"
-                                label="Senha"
-                                @click:append="show1 = !show1"
-                                outlined
-                            ></v-text-field>
-                        </v-col>
-                        <v-col lg="6" md="6" sm="12" v-else>
-                            <v-text-field
-                                v-model="user.new_password"
-                                :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
-                                :type="show1 ? 'text' : 'password'"
-                                label="Senha (Deixe em branco para não alterar)"
-                                @click:append="show1 = !show1"
-                                outlined
-                            ></v-text-field>
-                        </v-col>
-                        <v-col lg="6" md="6" sm="12">
-                            <v-select v-model="user.type" outlined :items="tipos" item-text="descricao" item-value="id" filled
-                            :rules="[...requiredRule]"
-                            label="Tipo de usuário"></v-select>
+            <v-row class="text-lg-center" >
+                <v-col cols="12" lg="6" md="6" >
+                    <v-text-field label="Nome completo" v-model="user.name" outlined :rules="[...lengthRule, ...requiredRule]"></v-text-field>
+                </v-col>
+                <v-col lg="6" md="6" cols="12">
+                    <v-text-field label="Email" type="text" v-model="user.email" outlined :rules="[...requiredRule, ...emailRule]" ></v-text-field>
+                </v-col>
+                <v-col lg="6" md="6" cols="12" v-if="!id">
+                    <v-text-field
+                        v-model="user.password"
+                        :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+                        :rules="[...requiredRule, ...lengthRule]"
+                        :type="show1 ? 'text' : 'password'"
+                        label="Senha"
+                        @click:append="show1 = !show1"
+                        outlined
+                    ></v-text-field>
+                </v-col>
+                <v-col lg="6" md="6" cols="12" v-else>
+                    <v-text-field
+                        v-model="user.new_password"
+                        :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+                        :type="show1 ? 'text' : 'password'"
+                        label="Senha (Deixe em branco para não alterar)"
+                        @click:append="show1 = !show1"
+                        outlined
+                    ></v-text-field>
+                </v-col>
+                <v-col lg="6" md="6" cols="12">
+                    <v-select v-model="user.type" outlined :items="tipos" item-text="descricao" item-value="id" filled
+                    :rules="[...requiredRule]"
+                    label="Tipo de usuário"></v-select>
 
-                        </v-col>
-                    </v-row>
                 </v-col>
             </v-row>
           </v-form>
 
         <v-row class="text-lg-left">
-            <v-col lg="12" md="12" sm="12">
+            <v-col lg="12" md="12" cols="12">
                 <v-btn elevation="1" large dark color="blue" @click="save()">Salvar</v-btn>
             </v-col>
         </v-row>
