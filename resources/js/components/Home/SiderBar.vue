@@ -1,5 +1,7 @@
 <template>
-      <v-navigation-drawer style="float: left; height: 100%;" v-model="drawer" permanent dark color="#1A1E21">
+    <div>
+      <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+      <v-navigation-drawer v-model="drawer" app dark color="#1A1E21">
           <template v-slot:prepend>
             <v-list-item two-line>
             <v-list-item-avatar>
@@ -7,14 +9,10 @@
             </v-list-item-avatar>
 
             <v-list-item-content>
-
-                <v-list-item-title>{{ $store.user }}</v-list-item-title>
-                <v-list-item-subtitle>Logged In</v-list-item-subtitle>
-
                 <v-list-item-title v-text="currentUser.name"></v-list-item-title>
                 <v-list-item-subtitle v-text="currentUser.tipo.slug"></v-list-item-subtitle>
-
             </v-list-item-content>
+                <v-btn @click.stop="drawer = !drawer" icon><v-icon>mdi-chevron-left</v-icon></v-btn>
             </v-list-item>
         </template>
 
@@ -75,19 +73,19 @@
             </v-list-item>
         </template>
     </v-navigation-drawer>
+    </div>
 </template>
 
 <script>
 import axios from 'axios';
 import {mapGetters} from 'vuex';
-import store from '../../store';
 
 export default {
     name: 'side-bar',
     data() {
         return {
             drawer: true,
-            imagemPadrao: '../images/foto-padrao.png'
+            imagemPadrao: '../images/foto-padrao.png',
         };
     },
     methods: {

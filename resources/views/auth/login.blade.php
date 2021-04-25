@@ -7,6 +7,7 @@
     <script src="{{ asset('js/app.js') }}" defer></script>
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <link rel="shortcut icon" href="{{ asset('images/logo-icon.png')}}" >
     <style>
         #card-login{
             border-radius: 20px;
