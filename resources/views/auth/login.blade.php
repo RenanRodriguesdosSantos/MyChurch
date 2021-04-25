@@ -59,7 +59,7 @@
                         </div>
                     </div>
 
-                    <div class="form-group row text-center">
+                    {{-- <div class="form-group row text-center">
                         <div class="col-md-12 pt-0 pb-0">
                             @if (Route::has('password.request'))
                                 <a class="btn btn-link" href="{{ route('password.request') }}">
@@ -67,7 +67,7 @@
                                 </a>
                             @endif
                         </div>
-                    </div>
+                    </div> --}}
                 </form>
             </div>
         </div>

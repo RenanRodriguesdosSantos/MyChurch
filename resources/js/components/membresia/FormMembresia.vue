@@ -171,5 +171,7 @@ export default {
     height: 200px;
     width: auto;
     text-align: center;
+    align-content: center;
+    align-items: center;
 }
 </style>
