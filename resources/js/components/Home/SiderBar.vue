@@ -9,17 +9,8 @@
             </v-list-item-avatar>
 
             <v-list-item-content>
-<<<<<<< HEAD
                 <v-list-item-title v-text="currentUser.name"></v-list-item-title>
                 <v-list-item-subtitle v-text="currentUser.tipo.slug"></v-list-item-subtitle>
-=======
-
-                <v-list-item-title>{{ $store.user }}</v-list-item-title>
-
-                <v-list-item-title v-text="currentUser.name"></v-list-item-title>
-                <v-list-item-subtitle v-text="currentUser.tipo.descricao"></v-list-item-subtitle>
-
->>>>>>> d5af13571a1e3defd78c97d75e5552ce0ca3dad0
             </v-list-item-content>
                 <v-btn @click.stop="drawer = !drawer" icon><v-icon>mdi-chevron-left</v-icon></v-btn>
             </v-list-item>
