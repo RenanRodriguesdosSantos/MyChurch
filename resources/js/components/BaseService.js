@@ -6,7 +6,7 @@ import axios from 'axios';
  * Está é uma classe abstrata, é necessário herdar de BaseService para utiliza-la
  */
 
-
+ axios.defaults.baseURL = '/'
 export default class BaseService {
   static domain = '';
   static data = '';

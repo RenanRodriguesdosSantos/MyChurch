@@ -41,6 +41,7 @@
                                 mdi-pencil
                             </v-icon>
                             <v-icon
+                             v-if="item.tipo.slug != 'lider'"
                                 small
                                 @click="deleteItem(item)"
                             >

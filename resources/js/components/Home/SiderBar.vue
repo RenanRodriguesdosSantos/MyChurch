@@ -9,8 +9,17 @@
             </v-list-item-avatar>
 
             <v-list-item-content>
+<<<<<<< HEAD
                 <v-list-item-title v-text="currentUser.name"></v-list-item-title>
                 <v-list-item-subtitle v-text="currentUser.tipo.slug"></v-list-item-subtitle>
+=======
+
+                <v-list-item-title>{{ $store.user }}</v-list-item-title>
+
+                <v-list-item-title v-text="currentUser.name"></v-list-item-title>
+                <v-list-item-subtitle v-text="currentUser.tipo.descricao"></v-list-item-subtitle>
+
+>>>>>>> d5af13571a1e3defd78c97d75e5552ce0ca3dad0
             </v-list-item-content>
                 <v-btn @click.stop="drawer = !drawer" icon><v-icon>mdi-chevron-left</v-icon></v-btn>
             </v-list-item>
@@ -19,7 +28,7 @@
         <v-divider></v-divider>
         <v-list>
 
-            <v-list-item link @click="goTo('/')" prepend-icon="mdi-cogs">
+            <v-list-item link @click="goTo('home')" prepend-icon="mdi-cogs">
                     <v-list-item-icon>
                         <v-icon>mdi-home</v-icon>
                     </v-list-item-icon>
@@ -27,7 +36,7 @@
                         <v-list-item-title>Home</v-list-item-title>
                     </v-list-item-content>
             </v-list-item>
-            <v-list-group :value="false" no-action prepend-icon="mdi-cogs">
+            <v-list-group :value="false" no-action prepend-icon="mdi-church" v-if="checkForUserRole(['lider'])">
 
                 <template v-slot:activator>
                 <v-list-item-content>
@@ -46,7 +55,7 @@
                     </v-list-item-content>
                 </v-list-item>
             </v-list-group>
-            <v-list-group :value="false" no-action prepend-icon="mdi-account">
+            <v-list-group :value="false" no-action prepend-icon="mdi-account" v-if="checkForUserRole(['lider'])">
                 <template v-slot:activator>
                 <v-list-item-content>
                     <v-list-item-title >Usuários</v-list-item-title>
@@ -67,6 +76,9 @@
         </v-list>
         <template v-slot:append>
             <v-list-item link @click="logout()">
+                <v-list-item-icon>
+                        <v-icon>mdi-logout</v-icon>
+                    </v-list-item-icon>
                 <v-list-item-content>
                     <v-list-item-title>Logout</v-list-item-title>
                 </v-list-item-content>
@@ -96,11 +108,14 @@ export default {
         },
         goTo(name) {
             this.$router.push({ name });
+        },
+        checkForUserRole(roles) {
+            return roles.includes(this.currentUser.tipo.slug);
         }
     },
     computed: {
         ...mapGetters({
-            currentUser: "GET_CURRENT_USER"
+            currentUser: "GET_CURRENT_USER",
         })
     }
 }

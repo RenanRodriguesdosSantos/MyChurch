@@ -14,7 +14,7 @@ Vue.use(Router);
 const routes = [
   {
     path: '/',
-    name: '/',
+    name: 'home',
     component: Home,
   },
   {
@@ -53,7 +53,10 @@ const routes = [
 
 const router = new Router({
   routes,
+<<<<<<< HEAD
   //mode: 'history'
+=======
+>>>>>>> d5af13571a1e3defd78c97d75e5552ce0ca3dad0
 });
 
 // // em todas as rotas é verificado autenticação e autorização

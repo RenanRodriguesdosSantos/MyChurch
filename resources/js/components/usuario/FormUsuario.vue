@@ -98,15 +98,21 @@ export default {
             if(this.$refs.userForm.validate()) {
                 this.isLoading = true;
                 const params = this.user;
-                await this.usuarioService.request('POST', 'cadastro', params).then((response) => {
-                    this.isLoading = false;
-                    if(response.status >= 200 && response.status <= 299) {
-                        this.$router.push('/usuario/listar');
+                let response = null
+                try {
+                    response = await this.usuarioService.request('POST', 'cadastro', params).then(() => {
+                        this.isLoading = false;
                         Vue.$toast.success('Operação realizada com sucesso');
+                        this.$router.push('/usuario/listar');
+                    });
+                } catch(error) {
+                    this.isLoading = false;
+                    if(error.response.data.message) {
+                        Vue.$toast.error(error.response.data.message);
                     } else {
                         Vue.$toast.error('Ocorreu um problema ao salvar o registro');
                     }
-                });
+                }
             }
         },
         validateEmail(value) {
@@ -132,9 +138,19 @@ export default {
                 this.tipos = response.data;
                 this.isLoading = false;
             });
-        }
+        },
+        clearFields() {
+            this.user = {
+                name: null,
+                email: null,
+                type: null,
+                password: null,
+                new_password: null,
+            };
+        },
     },
     mounted() {
+        this.clearFields();
         this.loadTipos();
         if (this.id) {
             this.loadUser();
