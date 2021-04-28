@@ -5,6 +5,10 @@ import FormMembresia from '../components/membresia/FormMembresia'
 import ListarMembresia from '../components/membresia/ListarMembresia';
 import FormUsuario from '../components/usuario/FormUsuario';
 import ListarUsuario from '../components/usuario/ListarUsuario';
+import FormVisitante from '../components/visitante/FormVisitante';
+import ListarVisitante from '../components/visitante/ListarVisitante';
+import FormEvento from '../components/evento/FormEvento';
+// import ListarEvento from '../components/evento/ListarEvento';
 
 Vue.use(Router);
 
@@ -48,6 +52,27 @@ const routes = [
     path: '/usuario/listar',
     name: 'listar-usuario',
     component: ListarUsuario,
+  },
+  {
+    path: '/visitante/cadastro',
+    name: 'cadastro-visitante',
+    component: FormVisitante,
+  },
+  {
+    path: '/visitante/listar',
+    name: 'listar-visitante',
+    component: ListarVisitante,
+  },
+  {
+    path: '/visitante/editar/:id',
+    name: 'editar-visitante',
+    component: FormVisitante,
+    props: true,
+  },
+  {
+    path: '/evento/cadastro',
+    name: 'cadastro-evento',
+    component: FormEvento,
   },
 ];
 

@@ -46,6 +46,44 @@
                     </v-list-item-content>
                 </v-list-item>
             </v-list-group>
+            <v-list-group :value="false" no-action prepend-icon="mdi-walk">
+
+                <template v-slot:activator>
+                <v-list-item-content>
+                    <v-list-item-title >Visitantes</v-list-item-title>
+                </v-list-item-content>
+                </template>
+
+                <v-list-item link @click="goTo('cadastro-visitante')">
+                    <v-list-item-content>
+                        <v-list-item-title>Novo visitante</v-list-item-title>
+                    </v-list-item-content>
+                </v-list-item>
+                <v-list-item link @click="goTo('listar-visitante')">
+                    <v-list-item-content>
+                        <v-list-item-title>Lista de visitantes</v-list-item-title>
+                    </v-list-item-content>
+                </v-list-item>
+            </v-list-group>
+            <v-list-group :value="false" no-action prepend-icon="mdi-calendar-today" v-if="checkForUserRole(['lider'])">
+
+                <template v-slot:activator>
+                <v-list-item-content>
+                    <v-list-item-title >Eventos</v-list-item-title>
+                </v-list-item-content>
+                </template>
+
+                <v-list-item link @click="goTo('cadastro-evento')">
+                    <v-list-item-content>
+                        <v-list-item-title>Novo evento</v-list-item-title>
+                    </v-list-item-content>
+                </v-list-item>
+                <!-- <v-list-item link @click="goTo('listar-evento')">
+                    <v-list-item-content>
+                        <v-list-item-title>Lista de eventos</v-list-item-title>
+                    </v-list-item-content>
+                </v-list-item> -->
+            </v-list-group>
             <v-list-group :value="false" no-action prepend-icon="mdi-account" v-if="checkForUserRole(['lider'])">
                 <template v-slot:activator>
                 <v-list-item-content>

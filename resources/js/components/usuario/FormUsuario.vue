@@ -9,8 +9,10 @@
             ></v-progress-circular>
             </v-overlay>
            <v-row class="mb-6">
-            <v-col lg="12" md="12" xs="12">
-                <h3>Cadastro de usuários</h3>
+
+            <v-col lg="12" md="12" sm="12">
+                <h3 v-if="id">Edição de Usuário</h3>
+                <h3 v-else>Cadastro de Usuário</h3>
             </v-col>
           </v-row>
           <v-form ref="userForm">

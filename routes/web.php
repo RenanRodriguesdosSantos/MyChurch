@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\MembresiaController;
+use App\Http\Controllers\VisitanteController;
 use App\Http\Controllers\TiposController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
@@ -42,5 +43,11 @@ Route::middleware(['auth'])->group(function(){
         });
         Route::prefix('tipos')->group(function () {
             Route::get('get-all-types', [TiposController::class, 'index']);
+        });
+        Route::prefix('visitante')->group(function () {
+            Route::post('cadastro', [VisitanteController::class, 'store']);
+            Route::get('get-all-visitantes', [VisitanteController::class, 'index']);
+            Route::get('get-visitante', [VisitanteController::class, 'show']);
+            Route::post('delete-visitante', [VisitanteController::class, 'destroy']);
         });
 });
