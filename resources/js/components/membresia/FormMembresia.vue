@@ -18,27 +18,27 @@
             <v-row class="text-lg-center">
                 <v-col lg="8" md="8" sm="12">
                     <v-row class="text-lg-center" >
-                        <v-col lg="12" md="12" sm="12">
+                        <v-col lg="12" md="12" cols="12">
                             <v-text-field label="Nome completo" v-model="membro.nome" outlined :rules="[...lengthRule, ...requiredRule]"></v-text-field>
                         </v-col>
-                        <v-col lg="12" md="12" sm="12">
+                        <v-col lg="12" md="12" cols="12">
                             <v-text-field label="Email" v-model="membro.email" outlined :rules="[...requiredRule, ...emailRule]" ></v-text-field>
                         </v-col>
-                        <v-col lg="4" md="4" sm="12">
+                        <v-col lg="4" md="4" cols="12">
                             <v-text-field max-le label="CPF" v-model="membro.cpf" outlined :rules="[...cpfRule]"></v-text-field>
                         </v-col>
-                        <v-col lg="4" md="4" sm="12">
+                        <v-col lg="4" md="4" cols="12">
                             <v-text-field label="Telefone" v-model="membro.telefone" outlined :rules="[...lengthRuleTelefone, ...requiredRule]" ></v-text-field>
                         </v-col>
-                        <v-col lg="4" md="4" sm="12">
+                        <v-col lg="4" md="4" cols="12">
                             <v-text-field type="date" label="Data de batismo" v-model="membro.databatismo" :rules="[...requiredRule]" outlined ></v-text-field>
                         </v-col>
-                        <v-col lg="12" md="12" sm="12">
+                        <v-col lg="12" md="12" cols="12">
                             <v-text-field label="Endereço" v-model="membro.endereco" outlined ></v-text-field>
                         </v-col>
                     </v-row>
                 </v-col>
-                <v-col lg="4" md="4" sm="12">
+                <v-col lg="4" md="4" cols="12">
                     <img class="img-profile" v-if="image" :src="image" >
                     <v-file-input
                         accept="image/*"
@@ -171,5 +171,8 @@ export default {
 .img-profile {
     height: 200px;
     width: auto;
+    text-align: center;
+    align-content: center;
+    align-items: center;
 }
 </style>

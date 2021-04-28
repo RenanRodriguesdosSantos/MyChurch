@@ -14,7 +14,7 @@ class TiposController extends Controller
      */
     public function index()
     {
-        return Tipo::whereIn('slug', [ 'obreiro','porteiro'])->get();
+        return Tipo::all();
     }
 
     /**
