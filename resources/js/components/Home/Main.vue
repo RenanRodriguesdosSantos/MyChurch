@@ -1,10 +1,12 @@
 <template>
-  <div class="container-fluid fill-height">
-        <sider-bar>
-        </sider-bar>
-        <router-view>
-        </router-view>
-    </div>
+    <v-app>
+        <sider-bar></sider-bar>
+        <v-main>
+            <v-container fluid>
+                <router-view></router-view>
+            </v-container>
+        </v-main>
+    </v-app>
 </template>
 
 <script>

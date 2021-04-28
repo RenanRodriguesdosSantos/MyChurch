@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Auth::routes(['register' => true]);
+Auth::routes();
 
 Route::middleware(['auth'])->group(function(){
 

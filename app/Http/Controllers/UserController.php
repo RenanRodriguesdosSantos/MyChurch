@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -36,20 +37,41 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        if($request->id)
+        if($this->validateEmailAddress($request)) {
+            if($request->id)
             User::find($request->id)->update([
                 'name' => $request->name,
                 'email' => $request->email,
                 'type' => $request->type,
                 'password' => $request->new_password?Hash::make($request->new_password):$request->password
-            ]);
-        else
-            User::create([
-                'name' => $request->name,
-                'email' => $request->email,
-                'type' => $request->type,
-                'password' => Hash::make($request->password),
-            ]);
+                ]);
+            else
+                User::create([
+                    'name' => $request->name,
+                    'email' => $request->email,
+                    'type' => $request->type,
+                    'password' => Hash::make($request->password),
+                ]);
+
+        } else {
+            return response()->json(array(
+                'code'      =>  422,
+                'message'   =>  'Email já está cadastrado no sistema',
+            ), 422);
+        }
+
+    }
+    private function validateEmailAddress(Request $request) {
+        $userQuery = User::query();
+        if ($request->has('id')) {
+            $userQuery->where('id', '!=', $request->id);
+        }
+        $user = $userQuery->where('email', $request->email)->first();
+        if (!empty($user)) {
+            return false;
+        }
+
+        return true;
     }
 
     /**

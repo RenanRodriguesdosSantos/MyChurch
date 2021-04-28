@@ -1,12 +1,10 @@
 <template>
-  <div >
-    <div class="d-flex justify-center pt-md-12">
-        <v-img max-width="600" max-height="350" :src="imagemLogo" />
-    </div>
-    <div class="d-flex justify-center">
-        <h1>Bem Vindo!</h1>
-    </div>
-  </div>
+    <v-row justify="center" class="pt-md-12">
+      <v-col md="5">
+          <v-img max-height="400" max-width="500" :src="imagemLogo"></v-img><br/>
+          <h1 class="text-center">Bem Vindo!</h1>
+      </v-col>
+    </v-row>
 </template>
 
 <script>
