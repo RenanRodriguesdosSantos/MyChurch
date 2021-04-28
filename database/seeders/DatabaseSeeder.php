@@ -15,7 +15,8 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             TipoSeeder::class,
-            UserSeeder::class
+            UserSeeder::class,
+            EventoStatusSeeder::class
         ]);
 
         // \App\Models\User::factory(10)->create();

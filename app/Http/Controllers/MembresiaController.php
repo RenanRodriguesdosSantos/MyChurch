@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Membresia;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class MembresiaController extends Controller
@@ -15,7 +14,7 @@ class MembresiaController extends Controller
      */
     public function index()
     {
-        return Membresia::all();
+        return Membresia::where('tipo', 1)->get();
     }
 
     /**
@@ -36,11 +35,8 @@ class MembresiaController extends Controller
      */
     public function store(Request $request)
     {
-        // $imageName = null;
-        // if($request->foto){
-        //     $imageName= Carbon::now();
-        //     $request->foto->move('images', $imageName);
-        // }
+        $request['tipo'] = 1; //Membresia
+
         if($request->id)
             Membresia::find($request->id)->update($request->all());
         else
