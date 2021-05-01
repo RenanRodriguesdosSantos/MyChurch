@@ -78,11 +78,11 @@
                         <v-list-item-title>Novo evento</v-list-item-title>
                     </v-list-item-content>
                 </v-list-item>
-                <!-- <v-list-item link @click="goTo('listar-evento')">
+                <v-list-item link @click="goTo('listar-evento')">
                     <v-list-item-content>
                         <v-list-item-title>Lista de eventos</v-list-item-title>
                     </v-list-item-content>
-                </v-list-item> -->
+                </v-list-item>
             </v-list-group>
             <v-list-group :value="false" no-action prepend-icon="mdi-account" v-if="checkForUserRole(['lider'])">
                 <template v-slot:activator>

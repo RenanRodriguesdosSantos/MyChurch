@@ -19,12 +19,11 @@
                 <v-col lg="12" md="12" sm="12">
                     <v-row class="text-lg-center" >
                         <v-col lg="6" md="6" sm="12">
-                            <v-text-field label="Nome do Evento" v-model="evento.name" outlined :rules="[...lengthRule, ...requiredRule]"></v-text-field>
+                            <v-text-field label="Nome do Evento" v-model="evento.nome" outlined :rules="[...requiredRule]" autocomplete="off"></v-text-field>
                         </v-col>
-                         <v-col lg="4" md="4" sm="12">
-                            <v-text-field type="date" label="Data" v-model="evento.data" :rules="[...requiredRule]" outlined ></v-text-field>
+                         <v-col lg="2" md="2" sm="12">
+                            <v-text-field type="datetime-local" id="" label="Data/Hora" v-model="evento.data" :rules="[...requiredRule]" outlined ></v-text-field>
                         </v-col>
-
                     </v-row>
                 </v-col>
             </v-row>
@@ -51,14 +50,11 @@ export default {
         return {
             eventoService: new EventoService(),
             evento: {
-                name: null,
-                data:null,
-                status:null,
-                
+                nome: null,
+                data:null
             },
             isLoading: null,
             requiredRule: [v => !!v || 'Este campo é obrigatório.'],
-            lengthRule: [v => (v && v.length >= 8) || 'Esta campo deve conter 8 ou mais caracteres.']
         };
     },
     methods: {
@@ -71,7 +67,7 @@ export default {
                     response = await this.eventoService.request('POST', 'cadastro', params).then(() => {
                         this.isLoading = false;
                         Vue.$toast.success('Operação realizada com sucesso');
-                        this.$router.push('/usuario/listar');
+                        this.$router.push('/evento/listar');
                     });
                 } catch(error) {
                     this.isLoading = false;
@@ -90,20 +86,20 @@ export default {
             }
             await this.eventoService.request('GET', 'get-evento', null, { params }).then((response) => {
                 this.evento = response.data;
+                this.evento.data = this.evento.data_input;
                 this.isLoading = false;
             });
         },
         clearFields() {
             this.evento = {
-                name: null,
+                nome: null,
+                data:null,
             };
         },
     },
     mounted() {
-        this.clearFields();
-        if (this.id) {
+        if (this.id) 
             this.loadEvento();
-        }
     },
 }
 </script>

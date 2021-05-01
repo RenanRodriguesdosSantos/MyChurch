@@ -6,6 +6,7 @@ use App\Http\Controllers\VisitanteController;
 use App\Http\Controllers\TiposController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VisitasController;
+use App\Http\Controllers\EventoController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -53,6 +54,7 @@ Route::middleware(['auth'])->group(function(){
             Route::get('get-all-visitantes', [VisitanteController::class, 'index']);
             Route::get('get-visitante', [VisitanteController::class, 'show']);
             Route::post('delete-visitante', [VisitanteController::class, 'destroy']);
+            Route::post('tonar-mebro-visitante', [VisitanteController::class, 'tornarMembro']);
         });
 
         Route::prefix('visitas')->group(function () {
@@ -60,5 +62,13 @@ Route::middleware(['auth'])->group(function(){
             Route::get('get-all-visitas', [VisitasController::class, 'index']);
             Route::get('get-visitante', [VisitanteController::class, 'show']);
             Route::post('delete-visitante', [VisitanteController::class, 'destroy']);
+        });
+
+        Route::prefix('evento')->group(function () {
+            Route::post('cadastro', [EventoController::class, 'store']);
+            Route::get('get-all-eventos', [EventoController::class, 'index']);
+            Route::get('get-evento', [EventoController::class, 'show']);
+            Route::post('delete-evento', [EventoController::class, 'destroy']);
+
         });
 });

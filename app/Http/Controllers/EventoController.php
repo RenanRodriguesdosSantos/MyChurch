@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Evento;
 use Illuminate\Http\Request;
+use App\Models\EventoStatus;
+use Illuminate\Support\Facades\Auth;
 
 class EventoController extends Controller
 {
@@ -35,11 +37,13 @@ class EventoController extends Controller
      */
     public function store(Request $request)
     {
+        $request['user_id'] = Auth::user()->id;
+        $request['evento_status_id'] = 2; /// não realizado
 
         if($request->id)
-        Evento::find($request->id)->update($request->all());
+            Evento::find($request->id)->update($request->all());
         else
-        Evento::create($request->all());
+            Evento::create($request->all());
     }
 
     /**
@@ -85,5 +89,10 @@ class EventoController extends Controller
     public function destroy(Request $request)
     {
         return Evento::find($request->id)->delete();
+    }
+
+    public function getStatusEventos()
+    {
+        return EventoStatus::all();
     }
 }

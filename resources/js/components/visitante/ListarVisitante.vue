@@ -27,6 +27,13 @@
                             <v-icon
                                 small
                                 class="mr-2"
+                                @click="tornarMembro(item)"
+                            >
+                                mdi-church
+                            </v-icon>
+                            <v-icon
+                                small
+                                class="mr-2"
                                 @click="editItem(item)"
                             >
                                 mdi-pencil
@@ -44,11 +51,22 @@
         </v-container>
         <v-dialog v-model="dialogDelete" persistent max-width="600px">
           <v-card>
-            <v-card-title class="headline">Tem certeza que deseja deletar este membro?</v-card-title>
+            <v-card-title class="headline">Tem certeza que deseja deletar este visitante?</v-card-title>
             <v-card-actions>
               <v-spacer></v-spacer>
               <v-btn color="error" text @click="closeDelete">Cancelar</v-btn>
               <v-btn color="success" text @click="deleteItemConfirm">OK</v-btn>
+              <v-spacer></v-spacer>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
+                <v-dialog v-model="dialogMembro" persistent max-width="600px">
+          <v-card>
+            <v-card-title class="headline">Deseja tornar este visitante um membro?</v-card-title>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn color="error" text @click="closeMembro">Cancelar</v-btn>
+              <v-btn color="success" text @click="membroItemConfirm">OK</v-btn>
               <v-spacer></v-spacer>
             </v-card-actions>
           </v-card>
@@ -73,11 +91,17 @@ export default {
             ],
             deletedItem: null,
             dialogDelete: false,
+            vititanteItem : null,
+            dialogMembro: false,
         };
     },
     watch: {
         dialogDelete (val) {
             val || this.closeDelete()
+        },
+
+        dialogMembro (val) {
+            val || this.closeMembro()
         },
     },
     methods: {
@@ -102,6 +126,20 @@ export default {
                 this.isLoading = false;
             });
         },
+        async membroVisitante() {
+            this.isLoading = true;
+            const params = {
+                id: this.vititanteItem.id
+            }
+            await this.visitanteService.request('POST', 'tonar-mebro-visitante', params).then((response) => {
+                if(response.status >= 200 && response.status <= 299) {
+                    Vue.$toast.success('Operação realizada com sucesso');
+                } else {
+                    Vue.$toast.error('Ocorreu um problema ao salvar o registro');
+                }
+                this.isLoading = false;
+            });
+        },
         editItem(item) {
             this.$router.push({ name: 'editar-visitante', params: {
                 id: item.id,
@@ -112,14 +150,28 @@ export default {
             this.dialogDelete = true
         },
 
+        tornarMembro (item) {
+            this.vititanteItem = item;
+            this.dialogMembro = true
+        },
+
         async deleteItemConfirm () {
             await this.deleteVisitante();
             this.closeDelete();
             await this.fetchVisitantes();
         },
+        async membroItemConfirm () {
+            await this.membroVisitante();
+            this.closeMembro();
+            await this.fetchVisitantes();
+        },
         closeDelete () {
             this.dialogDelete = false;
             this.deletedItem = null
+        },
+        closeMembro () {
+            this.dialogMembro = false;
+            this.vititanteItem = null
         },
     },
     mounted() {

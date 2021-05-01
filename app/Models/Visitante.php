@@ -9,7 +9,7 @@ class Visitante extends Model
 {
     protected $table = 'membresia';
 
-    protected $fillable = ['nome', 'telefone', 'tipo'];
+    protected $fillable = ['nome', 'telefone', 'tipo', 'observacoes'];
 
     use HasFactory;
 }
