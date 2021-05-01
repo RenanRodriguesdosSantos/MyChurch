@@ -24,6 +24,11 @@
                         <v-col lg="4" md="4" sm="12">
                             <v-text-field label="Telefone" v-model="visitante.telefone" outlined :rules="[...lengthRuleTelefone, ...requiredRule]" ></v-text-field>
                         </v-col>
+                        <v-col lg="12" md="12" cols="12">
+                            <v-textarea label="Observações" type="text"
+                            hint="Descreva o que deve ser reaizado na visita"
+                            v-model="visitante.observacoes" outlined ></v-textarea>
+                        </v-col>
                     </v-row>
                 </v-col>
             </v-row>
@@ -52,6 +57,7 @@ export default {
             visitante: {
                 nome: null,
                 telefone: null,
+                observacoes: null
             },
             isLoading: null,
             requiredRule: [v => !!v || 'Este campo é obrigatório.'],
@@ -96,6 +102,7 @@ export default {
             this.visitante = {
                 nome: null,
                 telefone: null,
+                observacoes: null
             };
         },
 

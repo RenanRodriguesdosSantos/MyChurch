@@ -88,4 +88,9 @@ class VisitanteController extends Controller
     {
         return Visitante::find($request->id)->delete();
     }
+
+    public function tornarMembro(Request $request)
+    {
+        return Visitante::find($request->id)->update(['tipo'=>1]);
+    }
 }

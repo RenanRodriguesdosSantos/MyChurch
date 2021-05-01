@@ -10,7 +10,7 @@ import ListarVisitante from '../components/visitante/ListarVisitante';
 import FormEvento from '../components/evento/FormEvento';
 import FormCadastroVisita from '../components/visitas/FormCadastroVisita';
 import ListarVisitas from '../components/visitas/ListarVisitas';
-// import ListarEvento from '../components/evento/ListarEvento';
+import ListarEvento from '../components/evento/ListarEvento';
 
 Vue.use(Router);
 
@@ -75,6 +75,17 @@ const routes = [
     path: '/evento/cadastro',
     name: 'cadastro-evento',
     component: FormEvento,
+  },
+  {
+    path: '/evento/listar',
+    name: 'listar-evento',
+    component: ListarEvento,
+  },
+  {
+    path: '/evento/editar/:id',
+    name: 'editar-evento',
+    component: FormEvento,
+    props: true,
   },
   {
     path: '/visita/agenda',
