@@ -5,6 +5,7 @@ use App\Http\Controllers\MembresiaController;
 use App\Http\Controllers\VisitanteController;
 use App\Http\Controllers\TiposController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\VisitasController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -35,18 +36,28 @@ Route::middleware(['auth'])->group(function(){
             Route::get('get-membro', [MembresiaController::class, 'show']);
             Route::post('delete-membro', [MembresiaController::class, 'destroy']);
         });
+
         Route::prefix('user')->group(function () {
             Route::post('cadastro', [UserController::class, 'store']);
             Route::get('get-all-users', [UserController::class, 'index']);
             Route::get('get-user', [UserController::class, 'show']);
             Route::post('delete-user', [UserController::class, 'destroy']);
         });
+
         Route::prefix('tipos')->group(function () {
             Route::get('get-all-types', [TiposController::class, 'index']);
         });
+
         Route::prefix('visitante')->group(function () {
             Route::post('cadastro', [VisitanteController::class, 'store']);
             Route::get('get-all-visitantes', [VisitanteController::class, 'index']);
+            Route::get('get-visitante', [VisitanteController::class, 'show']);
+            Route::post('delete-visitante', [VisitanteController::class, 'destroy']);
+        });
+
+        Route::prefix('visitas')->group(function () {
+            Route::post('agendar', [VisitasController::class, 'store']);
+            Route::get('get-all-visitas', [VisitasController::class, 'index']);
             Route::get('get-visitante', [VisitanteController::class, 'show']);
             Route::post('delete-visitante', [VisitanteController::class, 'destroy']);
         });

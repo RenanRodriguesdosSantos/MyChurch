@@ -8,6 +8,8 @@ import ListarUsuario from '../components/usuario/ListarUsuario';
 import FormVisitante from '../components/visitante/FormVisitante';
 import ListarVisitante from '../components/visitante/ListarVisitante';
 import FormEvento from '../components/evento/FormEvento';
+import FormCadastroVisita from '../components/visitas/FormCadastroVisita';
+import ListarVisitas from '../components/visitas/ListarVisitas';
 // import ListarEvento from '../components/evento/ListarEvento';
 
 Vue.use(Router);
@@ -73,6 +75,16 @@ const routes = [
     path: '/evento/cadastro',
     name: 'cadastro-evento',
     component: FormEvento,
+  },
+  {
+    path: '/visita/agenda',
+    name: 'agendar-visita',
+    component: FormCadastroVisita,
+  },
+  {
+    path: '/visita/lista',
+    name: 'listar-visitas',
+    component: ListarVisitas,
   },
 ];
 
