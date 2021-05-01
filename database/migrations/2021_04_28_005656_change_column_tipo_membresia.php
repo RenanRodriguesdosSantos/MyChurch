@@ -14,7 +14,7 @@ class ChangeColumnTipoMembresia extends Migration
     public function up()
     {
         Schema::table('membresia', function (Blueprint $table) {
-            $table->integer('tipo')->nullable()->after('foto');
+            // $table->integer('tipo')->nullable()->after('foto');
         });
     }
 

@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\StatusVisitas;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -14,9 +15,10 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call([
-            TipoSeeder::class,
-            UserSeeder::class,
-            EventoStatusSeeder::class
+            // TipoSeeder::class,
+            // UserSeeder::class,
+            // EventoStatusSeeder::class,
+            StatusVisitasSeeder::class,
         ]);
 
         // \App\Models\User::factory(10)->create();
