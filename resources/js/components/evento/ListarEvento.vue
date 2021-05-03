@@ -28,12 +28,12 @@
                             <span>{{
 
                                 new Date(item.data).toLocaleDateString('pt-br', {
-    year: 'numeric',
-    month: 'numeric',
-    day: 'numeric',
-    hour: 'numeric',
-    minute: 'numeric',
-}) 
+                                year: 'numeric',
+                                month: 'numeric',
+                                day: 'numeric',
+                                hour: 'numeric',
+                                minute: 'numeric',
+                            }) 
                                 
                                 }}</span>
                         </template>

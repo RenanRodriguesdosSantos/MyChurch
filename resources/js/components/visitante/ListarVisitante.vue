@@ -23,11 +23,34 @@
                         item-key="id"
                         :loading="isLoading"
                     >
+                        <template v-slot:item.observacoes="{ item }">
+                            <v-tooltip top v-if="item.observacoes">
+                            <template v-slot:activator="{ on, attrs }">
+                                <v-icon
+                                small
+                                v-bind="attrs"
+                                v-on="on"
+                                v-if="item.observacoes"
+                                >
+                                mdi-message-text
+                                </v-icon>
+                               
+                            </template>
+                            <span>{{item.observacoes}}</span>
+                            </v-tooltip>
+                            <v-icon
+                            small
+                            v-else
+                            >
+                            mdi-message-text-outline
+                            </v-icon>
+                        </template>
                         <template v-slot:item.acoes="{ item }">
                             <v-icon
                                 small
                                 class="mr-2"
                                 @click="tornarMembro(item)"
+                                v-if="checkForUserRole(['lider'])"
                             >
                                 mdi-church
                             </v-icon>
@@ -76,6 +99,7 @@
 
 <script>
 import VisitanteService from './VisitanteService';
+import {mapGetters} from 'vuex';
 
 export default {
     name: 'listar-visitante',
@@ -87,6 +111,7 @@ export default {
             headers: [
                 { text: 'Nome', value: 'nome', sortable: false, align: 'center' },
                 { text: 'Telefone', value: 'telefone', sortable: false, align: 'center' },
+                { text: 'Observações', value: 'observacoes', sortable: false, align: 'center' },
                 { text: 'Ações', value: 'acoes', sortable: false, align: 'center' },
             ],
             deletedItem: null,
@@ -103,6 +128,11 @@ export default {
         dialogMembro (val) {
             val || this.closeMembro()
         },
+    },
+    computed: {
+        ...mapGetters({
+            currentUser: "GET_CURRENT_USER",
+        })
     },
     methods: {
         async fetchVisitantes() {
@@ -173,6 +203,9 @@ export default {
             this.dialogMembro = false;
             this.vititanteItem = null
         },
+        checkForUserRole(roles) {
+            return roles.includes(this.currentUser.tipo.slug);
+        }
     },
     mounted() {
         this.fetchVisitantes();
