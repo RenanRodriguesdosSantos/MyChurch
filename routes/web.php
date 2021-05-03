@@ -60,8 +60,9 @@ Route::middleware(['auth'])->group(function(){
         Route::prefix('visitas')->group(function () {
             Route::post('agendar', [VisitasController::class, 'store']);
             Route::get('get-all-visitas', [VisitasController::class, 'index']);
-            Route::get('get-visitante', [VisitanteController::class, 'show']);
-            Route::post('delete-visitante', [VisitanteController::class, 'destroy']);
+            Route::get('get-visita', [VisitasController::class, 'show']);
+            Route::post('delete-visita', [VisitasController::class, 'destroy']);
+            Route::post('realizar', [VisitasController::class, 'finalizar']);
         });
 
         Route::prefix('evento')->group(function () {

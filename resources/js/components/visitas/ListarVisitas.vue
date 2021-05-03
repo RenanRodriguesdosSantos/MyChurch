@@ -11,7 +11,7 @@
            <v-row class="mb-6">
 
             <v-col v-for="visita in visitas" :key="visita.id" cols="12" lg="3" md="4" sm="3">
-                <visita-card :visita="visita">
+                <visita-card :visita="visita" :atualizarLista="fetchVisitas">
                 </visita-card>
             </v-col>
           </v-row>
