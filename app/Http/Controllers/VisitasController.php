@@ -17,6 +17,7 @@ class VisitasController extends Controller
     public function index()
     {
         return Visita::with('criadoPor','responsavel','status')
+        ->where('status_id',StatusVisitas::where('slug','agendada')->first()->id)
         ->get();
 
     }
@@ -39,25 +40,32 @@ class VisitasController extends Controller
      */
     public function store(Request $request)
     {
+        if($request->id)
+            Visita::find($request->id)->update([
+                'criado_por' => Auth::user()->id,
+                'data_visita' => $request->data_visita,
+                'endereco' => $request->endereco,
+                'descricao' => $request->descricao,
+            ]);
+        else
         Visita::create([
             'criado_por' => Auth::user()->id,
             'data_visita' => $request->data_visita,
-            'responsavel' => $request->responsavel_id,
             'endereco' => $request->endereco,
             'descricao' => $request->descricao,
-            'status_id' => StatusVisitas::where('slug','agendada')->first()->id,
+            'status_id' => StatusVisitas::where('slug','agendada')->first()->id
         ]);
     }
-
+ 
     /**
      * Display the specified resource.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request)
     {
-        //
+        return Visita::with('criadoPor')->find($request->id);
     }
 
     /**
@@ -89,8 +97,17 @@ class VisitasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        Visita::find($request->id)->delete();
+    }
+
+    public function finalizar(Request $request){
+        Visita::find($request->id)->update([
+            'responsavel' => Auth::user()->id,
+            'observacao' => $request->observacao,
+            'status_id' => StatusVisitas::where('slug','realizada')->first()->id,
+            'data_realizada' => date('yyyy-mm-dd')
+        ]);
     }
 }

@@ -18,7 +18,7 @@
 <body style="background: #A3CEF1">
     <div class="container">
         <div class="row justify-content-center" >
-            <div class="col-md-3 shadow-lg bg-light p-md-4 mt-md-5" id="card-login">
+            <div class="col-md-3 shadow-lg bg-light p-md-4 m-3 mt-md-5" id="card-login">
                 <img class="img-fluid" src="images/logo.png"/>
                 <form method="POST" action="{{ route('login') }}">
                     @csrf

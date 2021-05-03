@@ -24,10 +24,6 @@
                     <v-text-field type="time" label="Hora da visita" v-model="visita.hora" outlined :rules="requiredRule"></v-text-field>
                 </v-col>
                 <v-col cols="12" lg="6" md="6" >
-                    <v-autocomplete item-text="name" item-value="id" :items="usuarios" label="Responsável"
-                     v-model="visita.responsavel_id" outlined></v-autocomplete>
-                </v-col>
-                <v-col cols="12" lg="6" md="6" >
                     <v-text-field label="Endereço" v-model="visita.endereco"
                     hint="Endereço completo: Bairro, rua, número e complemento"
                     outlined :rules="requiredRule"></v-text-field>
@@ -58,7 +54,7 @@ import VisitaService from './VisitaService';
 import moment from 'moment';
 
 export default {
-    name: 'cadastro-usuario',
+    name: 'agendar-visita',
     props: ['id'],
     data() {
         return {
@@ -68,7 +64,6 @@ export default {
                 data_visita: null,
                 data: null,
                 hora: null,
-                responsavel_id: null,
                 endereco: null,
                 descricao: null,
             },
@@ -82,14 +77,12 @@ export default {
             if(this.$refs.visitaForm.validate()) {
                 this.isLoading = true;
                 const params = this.visita;
-                params.data_visita = this.visita.data + ' ' + this.visita.hora;
-                console.log(params);
                 let response = null;
                 try {
                     response = await this.visitaService.request('POST', 'agendar', params).then(() => {
                         this.isLoading = false;
                         Vue.$toast.success('Operação realizada com sucesso');
-                        // this.$router.push('/usuario/listar');
+                        this.$router.push({name: 'listar-visitas'}); 
                     });
                 } catch(error) {
                     this.isLoading = false;
@@ -119,10 +112,24 @@ export default {
                 descricao: null,
             };
         },
+        async loadVisita(){
+            this.isLoading = true;
+            const params = {
+                id: this.id,
+            }
+            await this.visitaService.request('GET', 'get-visita', null, { params }).then((response) => {
+                let dados = response.data;
+                this.visita = {...dados, data: moment(dados.data_visita).format( 'YYYY-MM-DD'), hora: new Date(dados.data_visita).toLocaleTimeString()};
+                this.isLoading = false;
+            });
+        }
     },
     mounted() {
         this.fetchUsuarios();
         this.clearFields();
+        if(this.id){
+            this.loadVisita();
+        }
     },
 }
 </script>
@@ -133,3 +140,4 @@ export default {
     width: auto;
 }
 </style>
+ 

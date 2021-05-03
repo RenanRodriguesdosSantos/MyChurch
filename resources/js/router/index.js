@@ -9,6 +9,7 @@ import FormVisitante from '../components/visitante/FormVisitante';
 import ListarVisitante from '../components/visitante/ListarVisitante';
 import FormEvento from '../components/evento/FormEvento';
 import FormCadastroVisita from '../components/visitas/FormCadastroVisita';
+import FormVisitar from '../components/visitas/FormVisitar';
 import ListarVisitas from '../components/visitas/ListarVisitas';
 import ListarEvento from '../components/evento/ListarEvento';
 
@@ -93,10 +94,22 @@ const routes = [
     component: FormCadastroVisita,
   },
   {
+    path: '/visita/editar/:id',
+    name: 'editar-visita',
+    component: FormCadastroVisita,
+    props: true,
+  },
+  {
     path: '/visita/lista',
     name: 'listar-visitas',
     component: ListarVisitas,
   },
+  {
+    path: '/visita/realizar/:id',
+    name: 'realizar-visita',
+    component: FormVisitar,
+    props: true
+  }
 ];
 
 const router = new Router({
