@@ -6,19 +6,26 @@
                     <v-flex xs6 class="mb-2">
                         Criado por: <b>{{visita.criado_por.name}}</b>
                     </v-flex>
+                     <v-flex xs6  class="mb-2">
+                        Responsavel: <b>{{ visita.responsavel.name }}</b>
+                    </v-flex>
                     <v-flex xs12  class="mb-2">
                         Data: <b> {{ dataVisita }} </b>
                     </v-flex>
                     <v-flex xs12 class="mb-2 descricao-text">
                         Descricao: {{visita.descricao}}
                     </v-flex>
-                    <v-flex xs12  class="mb-2">
-                        Status: <b :style="{ 'color' :statusColor }">{{visita.status.descricao}}</b>
+                    <v-flex xs12 class="mb-2 descricao-text">
+                        Endereço: {{visita.endereco}}
                     </v-flex>
+                    <!-- <v-flex xs12  class="mb-2">
+                        Status: <b :style="{ 'color' :statusColor }">{{visita.status.descricao}}</b>
+                    </v-flex> -->
+
                 </v-layout>
 
             </v-card-text>
-            <v-card-actions class="pb-2 justify-center text-center">
+            <v-card-actions class="pb-2 text-center">
                 <!-- <span class="justify-center">Editar</span> -->
                 <v-layout row class="mb-1">
                     <v-flex class="mouse-cursor mb-2" v-if="visita.criado_por.id == currentUser.id" @click="editItem(visita.id)" xs6>

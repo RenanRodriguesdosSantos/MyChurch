@@ -6,6 +6,7 @@ use App\Models\StatusVisitas;
 use App\Models\Visita;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class VisitasController extends Controller
 {
@@ -42,14 +43,15 @@ class VisitasController extends Controller
     {
         if($request->id)
             Visita::find($request->id)->update([
-                'criado_por' => Auth::user()->id,
                 'data_visita' => $request->data_visita,
                 'endereco' => $request->endereco,
                 'descricao' => $request->descricao,
+                'responsavel' => $request->responsavel_id,
             ]);
         else
         Visita::create([
             'criado_por' => Auth::user()->id,
+            'responsavel' => $request->responsavel_id,
             'data_visita' => $request->data_visita,
             'endereco' => $request->endereco,
             'descricao' => $request->descricao,
@@ -103,11 +105,19 @@ class VisitasController extends Controller
     }
 
     public function finalizar(Request $request){
-        Visita::find($request->id)->update([
-            'responsavel' => Auth::user()->id,
-            'observacao' => $request->observacao,
-            'status_id' => StatusVisitas::where('slug','realizada')->first()->id,
-            'data_realizada' => date('yyyy-mm-dd')
-        ]);
+        DB::transaction(function () use ($request){
+            $valores = "";
+            foreach ($request->participantes as $key => $value) {
+                $valores .= "('".$request->id."','$value')". ($key != sizeof($request->participantes) - 1?",":"");
+            }
+
+            DB::insert("insert into visita_participante(visita_id,participante_id) values $valores");
+        
+            Visita::find($request->id)->update([
+                'observacao' => $request->observacao,
+                'status_id' => StatusVisitas::where('slug','realizada')->first()->id,
+                'data_realizada' => date('yyyy-mm-dd')
+            ]);
+        });
     }
 }
