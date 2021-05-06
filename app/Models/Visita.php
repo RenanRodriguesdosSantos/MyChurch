@@ -19,5 +19,9 @@ class Visita extends Model
     public function status() {
         return $this->belongsTo(StatusVisitas::class, 'status_id');
     }
+    public function participantes(){
+        return $this->belongsToMany(User::class,'visita_participantes','visita_id','participante_id');
+    }
+
     use HasFactory;
 }
