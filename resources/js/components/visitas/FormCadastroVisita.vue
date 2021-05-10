@@ -57,7 +57,7 @@
             <v-textarea
               label="Descrição da visita"
               type="text"
-              hint="Descreva o que deve ser reaizado na visita"
+              hint="Descreva o que deve ser realizado na visita"
               v-model="visita.descricao"
               outlined
               :rules="requiredRule"
@@ -182,4 +182,3 @@ export default {
   width: auto;
 }
 </style>
- 

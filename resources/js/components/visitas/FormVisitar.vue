@@ -33,7 +33,7 @@
                 <v-textarea
                   label="Observação da Visita"
                   type="text"
-                  hint="Descreva o que foi reaizado na visita"
+                  hint="Descreva o que foi realizado na visita"
                   v-model="visita.observacao"
                   outlined
                   :rules="requiredRule"
@@ -180,4 +180,3 @@ export default {
   width: auto;
 }
 </style>
- 
