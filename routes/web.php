@@ -7,6 +7,8 @@ use App\Http\Controllers\TiposController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VisitasController;
 use App\Http\Controllers\EventoController;
+use App\Http\Controllers\MembresiaEventosController;
+use App\Http\Controllers\MembresiaVisitasController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -23,7 +25,7 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
-Route::middleware(['auth'])->group(function(){
+// Route::middleware(['auth'])->group(function(){
 
         // Route::get("/",return view('home'););
         Route::get('/',function(){
@@ -33,7 +35,7 @@ Route::middleware(['auth'])->group(function(){
         });
         Route::prefix('membresia')->group(function () {
             Route::post('cadastro', [MembresiaController::class, 'store']);
-            Route::get('get-all-membros', [MembresiaController::class, 'index']);
+            Route::get('get-membros', [MembresiaController::class, 'index']);
             Route::get('get-membro', [MembresiaController::class, 'show']);
             Route::post('delete-membro', [MembresiaController::class, 'destroy']);
         });
@@ -72,4 +74,9 @@ Route::middleware(['auth'])->group(function(){
             Route::post('delete-evento', [EventoController::class, 'destroy']);
 
         });
-});
+        Route::prefix('membresia-evento')->group(function () {
+            Route::post('add-membro-to-evento', [MembresiaEventosController::class, 'addMembroEvento']);
+            Route::post('remove-membro-from-evento', [MembresiaEventosController::class, 'removeMembroEvento']);
+            Route::get('get-all-membros', [MembresiaEventosController::class, 'getAllMembrosInEventos']);
+        });
+// });

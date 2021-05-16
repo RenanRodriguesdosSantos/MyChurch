@@ -99,7 +99,7 @@ export default {
     methods: {
         async fetchMembros() {
             this.isLoading = true;
-            await this.membresiaService.request('GET', 'get-all-membros').then((response) => {
+            await this.membresiaService.request('GET', 'get-membros').then((response) => {
                 this.items = response.data;
                 this.isLoading = false;
             });

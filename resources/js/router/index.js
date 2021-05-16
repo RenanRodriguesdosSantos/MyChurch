@@ -12,6 +12,7 @@ import FormCadastroVisita from '../components/visitas/FormCadastroVisita';
 import FormVisitar from '../components/visitas/FormVisitar';
 import ListarVisitas from '../components/visitas/ListarVisitas';
 import ListarEvento from '../components/evento/ListarEvento';
+import ChecklistEvento from '../components/evento/ChecklistEvento';
 
 Vue.use(Router);
 
@@ -108,6 +109,12 @@ const routes = [
     path: '/visita/realizar/:id',
     name: 'realizar-visita',
     component: FormVisitar,
+    props: true
+  },
+  {
+    path: '/evento/:id/checklist',
+    name: 'checklist-evento',
+    component: ChecklistEvento,
     props: true
   }
 ];
