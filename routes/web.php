@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MembresiaController;
 use App\Http\Controllers\VisitanteController;
 use App\Http\Controllers\TiposController;
@@ -25,7 +26,7 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
-// Route::middleware(['auth'])->group(function(){
+Route::middleware(['auth'])->group(function(){
 
         // Route::get("/",return view('home'););
         Route::get('/',function(){
@@ -79,4 +80,7 @@ Auth::routes();
             Route::post('remove-membro-from-evento', [MembresiaEventosController::class, 'removeMembroEvento']);
             Route::get('get-all-membros', [MembresiaEventosController::class, 'getAllMembrosInEventos']);
         });
-// });
+        Route::prefix('dashboard')->group(function () {
+            Route::get('get-dashboard-data', [DashboardController::class, 'getDashboardData']);
+        });
+});

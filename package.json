@@ -31,9 +31,11 @@
     "dependencies": {
         "@babel/polyfill": "^7.12.1",
         "@mdi/font": "^5.9.55",
+        "chart.js": "^2.9.4",
         "moment": "^2.29.1",
         "npm": "^7.9.0",
         "v-mask": "^2.2.4",
+        "vue-chartjs": "^3.5.1",
         "vue-router": "^3.5.1",
         "vue-toast-notification": "^0.6.1",
         "vuetify": "^2.4.9",

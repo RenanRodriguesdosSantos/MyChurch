@@ -58,7 +58,7 @@ class VisitasController extends Controller
             'status_id' => StatusVisitas::where('slug','agendada')->first()->id
         ]);
     }
- 
+
     /**
      * Display the specified resource.
      *
@@ -112,11 +112,12 @@ class VisitasController extends Controller
             }
 
             DB::insert("insert into visita_participante(visita_id,participante_id) values $valores");
-        
+
             Visita::find($request->id)->update([
                 'observacao' => $request->observacao,
+                'qtde_cesta_basicas' => $request->qtde_cesta_basicas,
                 'status_id' => StatusVisitas::where('slug','realizada')->first()->id,
-                'data_realizada' => date('yyyy-mm-dd')
+                'data_realizada' => now()
             ]);
         });
     }
