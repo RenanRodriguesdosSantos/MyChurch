@@ -33,11 +33,11 @@
                                 day: 'numeric',
                                 hour: 'numeric',
                                 minute: 'numeric',
-                            }) 
-                                
+                            })
+
                                 }}</span>
                         </template>
-                        <template v-slot:item.acoes="{ item }">
+                        <template v-if="currentUser.tipo.slug !== 'porteiro'" v-slot:item.acoes="{ item }">
                             <v-icon
                                 small
                                 class="mr-2"
@@ -50,6 +50,23 @@
                                 @click="deleteItem(item)"
                             >
                                 mdi-delete
+                            </v-icon>
+                            <v-icon
+                                small
+                                class="mr-2"
+                                @click="goToChecklist(item.id)"
+                            >
+                                mdi-playlist-check
+                            </v-icon>
+
+                        </template>
+                        <template v-else v-slot:item.acoes="{ item }">
+                            <v-icon
+                                small
+                                class="mr-2"
+                                @click="goToChecklist(item.id)"
+                            >
+                                mdi-playlist-check
                             </v-icon>
                         </template>
                     </v-data-table>
@@ -72,6 +89,7 @@
 
 <script>
 import EventoService from './EventoService';
+import {mapGetters} from 'vuex';
 
 export default {
     name: 'listar-evento',
@@ -90,6 +108,11 @@ export default {
             deletedItem: null,
             dialogDelete: false,
         };
+    },
+    computed: {
+        ...mapGetters({
+            currentUser: "GET_CURRENT_USER",
+        })
     },
     watch: {
         dialogDelete (val) {
@@ -132,6 +155,11 @@ export default {
             await this.deleteEvento();
             this.closeDelete();
             await this.fetchEventos();
+        },
+        goToChecklist(id) {
+            this.$router.push({ name: 'checklist-evento', params: {
+                id
+            }});
         },
         closeDelete () {
             this.dialogDelete = false;

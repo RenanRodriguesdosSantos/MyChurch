@@ -87,4 +87,9 @@ class MembresiaController extends Controller
     {
         return Membresia::find($request->id)->delete();
     }
+
+    public function getAllMembros()
+    {
+        return Membresia::select('id', 'nome', 'tipo', 'foto')->get();
+    }
 }

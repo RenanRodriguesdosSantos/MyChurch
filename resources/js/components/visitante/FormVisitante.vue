@@ -26,7 +26,7 @@
                         </v-col>
                         <v-col lg="12" md="12" cols="12">
                             <v-textarea label="Observações" type="text"
-                            hint="Descreva o que deve ser reaizado na visita"
+                            hint="Descreva o que deve ser realizado na visita"
                             v-model="visitante.observacoes" outlined ></v-textarea>
                         </v-col>
                     </v-row>
@@ -50,7 +50,7 @@ import VisitanteService from './VisitanteService';
 
 export default {
     name: 'cadastro-visitante',
-    props: ['id'],
+    props: ['id', 'isFromDialog'],
     data() {
         return {
             visitanteService: new VisitanteService(),
@@ -75,8 +75,11 @@ export default {
                     response = await this.visitanteService.request('POST', 'cadastro', params).then(() => {
                         this.isLoading = false;
                         Vue.$toast.success('Operação realizada com sucesso');
-                        this.$router.push('/visitante/listar');
-                        
+                        if (this.isFromDialog) {
+                            this.$emit('saved');
+                        } else {
+                            this.$router.push('/visitante/listar');
+                        }
                     });
                 } catch(error) {
                     this.isLoading = false;
