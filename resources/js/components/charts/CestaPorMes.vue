@@ -9,26 +9,35 @@ export default {
         required: true,
     },
   },
-  data: () => ({
-    chartdata: {
-      labels: Object.keys(this.cestaPorMes),
-      datasets: [
-        {
-          label: 'Cestas básicas',
-          backgroundColor: ['#bc37a7', '#ededed'],
-          data: Object.values(this.cestaPorMes),
+  data() {
+    return {
+        chartdata: {
+        labels: this.cestaPorMes.map(item => item.month),
+        datasets: [
+            {
+                label: 'Cestas básicas',
+                backgroundColor: '#303D46',
+                data: this.cestaPorMes.map(item => item.qtde)
+            }
+        ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                yAxes: [{
+                    display: true,
+                    ticks: {
+                        beginAtZero: true,
+                    }
+                }]
+            }
         }
-      ]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false
     }
-  }),
-
+  },
   mounted () {
-    this.renderChart(this.chartdata, this.options)
-  }
+    this.renderChart(this.chartdata, this.options);
+  },
 }
 </script>
 
