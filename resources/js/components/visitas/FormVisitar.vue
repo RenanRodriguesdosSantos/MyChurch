@@ -64,6 +64,21 @@
                   </template>
                 </v-autocomplete>
               </v-col>
+
+            </v-row>
+            <v-row>
+                <v-col cols="12" lg="6" md="6">
+                    <v-checkbox label="Teve doação de cestas básicas ?" v-model="cestaBasicas"></v-checkbox>
+                </v-col>
+                <v-col cols="12" lg="6" md="6">
+                    <v-text-field
+                        type="number"
+                        v-if="cestaBasicas"
+                        label="Quantidade"
+                        outlined
+                        v-model="visita.qtde_cesta_basicas"
+                    ></v-text-field>
+                </v-col>
             </v-row>
           </v-form>
         </v-col>
@@ -93,11 +108,13 @@ export default {
       usuarioService: new UsuarioService(),
       visita: {
         observacao: null,
+        qtde_cesta_basicas: 0,
       },
       isLoading: false,
       requiredRule: [(v) => !!v || "Este campo é obrigatório."],
       usuarios: [],
       participantes: [],
+      cestaBasicas: false,
     };
   },
   methods: {
