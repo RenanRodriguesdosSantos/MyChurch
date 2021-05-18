@@ -10,6 +10,7 @@ use App\Http\Controllers\VisitasController;
 use App\Http\Controllers\EventoController;
 use App\Http\Controllers\MembresiaEventosController;
 use App\Http\Controllers\MembresiaVisitasController;
+use App\Http\Controllers\RelatorioEventosController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -82,5 +83,13 @@ Route::middleware(['auth'])->group(function(){
         });
         Route::prefix('dashboard')->group(function () {
             Route::get('get-dashboard-data', [DashboardController::class, 'getDashboardData']);
+        });
+
+        Route::prefix('relatorios')->group(function () {
+
+            Route::prefix('eventos')->group(function () {
+                Route::get('get-data', [RelatorioEventosController::class, 'getRelatorioEventosData']);
+            });
+
         });
 });

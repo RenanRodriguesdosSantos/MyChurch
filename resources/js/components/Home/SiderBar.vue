@@ -120,6 +120,23 @@
                     </v-list-item-content>
                 </v-list-item>
             </v-list-group>
+            <v-list-group :value="false" no-action prepend-icon="mdi-text-box-search" v-if="checkForUserRole(['lider','obreiro'])">
+                <template v-slot:activator>
+                <v-list-item-content>
+                    <v-list-item-title >Relatórios</v-list-item-title>
+                </v-list-item-content>
+                </template>
+                <v-list-item link @click="goTo('relatorio-eventos')">
+                    <v-list-item-content>
+                        <v-list-item-title>Eventos</v-list-item-title>
+                    </v-list-item-content>
+                </v-list-item>
+                <v-list-item link @click="goTo('listar-visitas')">
+                    <v-list-item-content>
+                        <v-list-item-title>Membros/Visitantes</v-list-item-title>
+                    </v-list-item-content>
+                </v-list-item>
+            </v-list-group>
         </v-list>
         <template v-slot:append>
             <v-list-item link @click="logout()">
