@@ -36,7 +36,7 @@ class RelatorioEventosController extends Controller
                 $eventos_collect->push($obj_evento);
             }
             $return->eventos = $eventos_collect->sortBy('data')->values();
-            $return->frequencia_media = $eventos_collect->sum('participantes_membros') / $eventos_collect->sum('total_membros') * 100;
+            $return->frequencia_media = round($eventos_collect->sum('participantes_membros') / $eventos_collect->sum('total_membros') * 100, 2);
         }
         return Response::json($return);
     }
