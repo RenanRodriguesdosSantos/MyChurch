@@ -53,6 +53,8 @@ class VisitasController extends Controller
             'criado_por' => Auth::user()->id,
             'responsavel' => $request->responsavel_id,
             'data_visita' => $request->data_visita,
+            'data_visita' => $request->data_visita,
+            'membro_visitado' => $request->membro_visitado_id,
             'endereco' => $request->endereco,
             'descricao' => $request->descricao,
             'status_id' => StatusVisitas::where('slug','agendada')->first()->id
@@ -67,7 +69,7 @@ class VisitasController extends Controller
      */
     public function show(Request $request)
     {
-        return Visita::with('criadoPor')->find($request->id);
+        return Visita::with(['criadoPor', 'membroVisitado'])->find($request->id);
     }
 
     /**

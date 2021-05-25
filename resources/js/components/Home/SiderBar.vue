@@ -137,6 +137,18 @@
                     </v-list-item-content>
                 </v-list-item>
             </v-list-group>
+            <v-list-group :value="false" no-action prepend-icon="mdi-window-open-variant" v-if="checkForUserRole(['lider','obreiro'])">
+                <template v-slot:activator>
+                <v-list-item-content>
+                    <v-list-item-title >Porteiro</v-list-item-title>
+                </v-list-item-content>
+                </template>
+                <v-list-item link @click="goTo('relatorio-eventos')">
+                    <v-list-item-content>
+                        <v-list-item-title>Lista de eventos</v-list-item-title>
+                    </v-list-item-content>
+                </v-list-item>
+            </v-list-group>
         </v-list>
         <template v-slot:append>
             <v-list-item link @click="logout()">

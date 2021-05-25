@@ -40,6 +40,7 @@ Route::middleware(['auth'])->group(function(){
             Route::get('get-membros', [MembresiaController::class, 'index']);
             Route::get('get-membro', [MembresiaController::class, 'show']);
             Route::post('delete-membro', [MembresiaController::class, 'destroy']);
+            Route::get('get-all-membros', [MembresiaController::class, 'getAllMembros']);
         });
 
         Route::prefix('user')->group(function () {
