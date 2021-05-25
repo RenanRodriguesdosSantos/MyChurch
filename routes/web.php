@@ -90,6 +90,6 @@ Route::middleware(['auth'])->group(function(){
             Route::prefix('eventos')->group(function () {
                 Route::get('get-data', [RelatorioEventosController::class, 'getRelatorioEventosData']);
             });
-
+            Route::get('frequencia/membro-visitante/get-data', [MembresiaEventosController::class, 'getRelatorioFrequencia']);
         });
 });

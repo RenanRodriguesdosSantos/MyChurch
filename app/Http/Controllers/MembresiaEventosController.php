@@ -44,4 +44,34 @@ class MembresiaEventosController extends Controller
         Evento::find($evento_id)->update($update);
         
     }
+
+    public function getRelatorioFrequencia(Request $request){
+        $dataInicial = $request->inicio;
+        $dataFinal = $request->fim;
+
+        $membro = Membresia::find($request->id);
+        $eventosMembro = MembresiaEventos::where('membro_id', $request->id)
+        ->select('evento_id')
+        ->pluck('evento_id')
+        ->toArray();
+        $eventos = Evento::where(function ($query) use ($dataInicial,$dataFinal){
+                if(isset($dataInicial)){
+                    if(isset($dataFinal)){
+                        $query->whereBetween("data",[$dataInicial,date('Ymd', strtotime('+1 day', strtotime($dataFinal)))]);
+                    }else{
+                        $query->whereDate('data',$dataInicial);
+                    }
+                }
+            })
+            ->where("evento_status_id",'1')
+            ->get();
+
+        $collection = collect();
+
+        foreach($eventos as $evento) {
+            $evento->presente = in_array($evento->id , $eventosMembro);
+            $collection->push($evento);
+        }
+        return ["membro" => $membro, "eventos" => $collection];
+    }
 }
