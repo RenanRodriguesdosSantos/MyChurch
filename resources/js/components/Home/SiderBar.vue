@@ -143,7 +143,7 @@
                     <v-list-item-title >Porteiro</v-list-item-title>
                 </v-list-item-content>
                 </template>
-                <v-list-item link @click="goTo('relatorio-eventos')">
+                <v-list-item link @click="goTo('buscar-eventos')">
                     <v-list-item-content>
                         <v-list-item-title>Lista de eventos</v-list-item-title>
                     </v-list-item-content>

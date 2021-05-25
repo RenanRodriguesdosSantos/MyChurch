@@ -75,6 +75,7 @@ Route::middleware(['auth'])->group(function(){
             Route::get('get-all-eventos', [EventoController::class, 'index']);
             Route::get('get-evento', [EventoController::class, 'show']);
             Route::post('delete-evento', [EventoController::class, 'destroy']);
+            Route::get('get-evento-by-date', [EventoController::class, 'getEventoByDate']);
 
         });
         Route::prefix('membresia-evento')->group(function () {

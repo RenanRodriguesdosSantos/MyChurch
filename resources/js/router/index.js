@@ -14,6 +14,7 @@ import ListarVisitas from '../components/visitas/ListarVisitas';
 import ListarEvento from '../components/evento/ListarEvento';
 import ChecklistEvento from '../components/evento/ChecklistEvento';
 import RelatorioEventos from '../components/relatorios/RelatorioEventos';
+import BuscarEventosPorteiro from '../components/porteiro/BuscarEventosPorteiro';
 
 Vue.use(Router);
 
@@ -122,6 +123,12 @@ const routes = [
     path: '/relatorios/eventos',
     name: 'relatorio-eventos',
     component: RelatorioEventos,
+    props: true
+  },
+  {
+    path: '/buscar-eventos',
+    name: 'buscar-eventos',
+    component: BuscarEventosPorteiro,
     props: true
   }
 ];
