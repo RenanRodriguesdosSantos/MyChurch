@@ -50,7 +50,13 @@
                                     <tbody>
                                     <tr v-for="item in items" :key="item.descricao">
                                         <td>{{ item.nome }}</td>
-                                        <td>{{ item.data }}</td>
+                                        <td>{{ new Date(item.data).toLocaleDateString('pt-br', {
+                                                year: 'numeric',
+                                                month: 'numeric',
+                                                day: 'numeric',
+                                                hour: 'numeric',
+                                                minute: 'numeric',
+                                            })}}</td>
                                         <td>{{ item.presente?"SIM":"NÃO" }}</td>
                                     </tr>
                                     </tbody>
@@ -61,10 +67,10 @@
                 </v-col>
                 <v-col md="6" sm="12">
                     <v-row>
-                        <v-col cols="2">
+                        <v-col cols="3">
                             <v-img class="img-profile" max-height="70" max-width="70" v-if="image" :src="image" />
                         </v-col>
-                        <v-col cols="10">
+                        <v-col cols="9">
                             Nome: <h3>{{membro.nome}}</h3>
                         </v-col>
                     </v-row>
@@ -72,7 +78,8 @@
                         <v-col cols="12">
                             Frequência: <b>{{relatorio.frequencia}} %</b><br/>
                             Faltas: <b>{{relatorio.faltas}}</b><br/>
-                            Visitas: <b>{{relatorio.visitas}}</b>
+                            Visitas: <b>{{relatorio.visitas}}</b><br/>
+                            Total de Cestas: <b>{{relatorio.cestas}}</b>
                         </v-col>
                     </v-row>
                 </v-col>
@@ -122,9 +129,11 @@ export default {
                 this.items = response.data.eventos;
                 this.membro = response.data.membro;
                 this.image = this.membro.foto?this.membro.foto:this.image;
-                this.relatorio.frequencia = ((this.items.reduce((frequencia, element) =>{
+                this.relatorio.visitas = response.data.visitas.total;
+                this.relatorio.cestas = response.data.visitas.cestas?response.data.visitas.cestas:0;
+                this.relatorio.frequencia = this.items.length>0?((this.items.reduce((frequencia, element) =>{
                     return (frequencia += element.presente?1:0);
-                }, 0) * 100) / this.items.length);
+                }, 0) * 100) / this.items.length):0;
                 this.relatorio.faltas = this.items.reduce((frequencia, element) =>{
                     return (frequencia += element.presente?0:1);
                 }, 0);
