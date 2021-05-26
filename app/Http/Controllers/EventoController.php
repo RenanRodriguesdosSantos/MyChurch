@@ -6,6 +6,7 @@ use App\Models\Evento;
 use Illuminate\Http\Request;
 use App\Models\EventoStatus;
 use Illuminate\Support\Facades\Auth;
+use App\Models\MembresiaEventos;
 
 class EventoController extends Controller
 {
@@ -98,5 +99,11 @@ class EventoController extends Controller
     public function getEventoByDate(Request $request)
     {
         return Evento::whereDate('data', $request->data)->get();
+    }
+    public function finish(Request $request)
+    {
+        $participantes = MembresiaEventos::where('evento_id', $request->id)->count();
+        $update = $participantes? ["evento_status_id" => 1]:["evento_status_id" => 2];
+        Evento::find($request->id)->update($update);
     }
 }

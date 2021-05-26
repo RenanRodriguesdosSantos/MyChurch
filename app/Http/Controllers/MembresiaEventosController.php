@@ -12,12 +12,10 @@ class MembresiaEventosController extends Controller
 {
 
     public function addMembroEvento(Request $request) {
-        $this->changeStatusEvento($request->evento_id);
         return MembresiaEventos::create($request->all());
     }
 
     public function removeMembroEvento(Request $request) {
-        $this->changeStatusEvento($request->evento_id);
         return MembresiaEventos::where('membro_id', $request->membro_id)
         ->where('evento_id', $request->evento_id)
         ->delete();
@@ -36,14 +34,6 @@ class MembresiaEventosController extends Controller
             $collection->push($membro);
         }
         return $collection;
-    }
-
-    public function changeStatusEvento($evento_id)
-    {
-        $participantes = MembresiaEventos::where('evento_id', $evento_id)->count();
-        $update = $participantes? ["evento_status_id" => 1]:["evento_status_id" => 2];
-        Evento::find($evento_id)->update($update);
-        
     }
 
     public function getRelatorioFrequencia(Request $request){
