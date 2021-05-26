@@ -40,6 +40,7 @@ Route::middleware(['auth'])->group(function(){
             Route::get('get-membros', [MembresiaController::class, 'index']);
             Route::get('get-membro', [MembresiaController::class, 'show']);
             Route::post('delete-membro', [MembresiaController::class, 'destroy']);
+            Route::get('get-all-membros', [MembresiaController::class, 'getAllMembros']);
         });
 
         Route::prefix('user')->group(function () {
@@ -74,6 +75,7 @@ Route::middleware(['auth'])->group(function(){
             Route::get('get-all-eventos', [EventoController::class, 'index']);
             Route::get('get-evento', [EventoController::class, 'show']);
             Route::post('delete-evento', [EventoController::class, 'destroy']);
+            Route::get('get-evento-by-date', [EventoController::class, 'getEventoByDate']);
 
         });
         Route::prefix('membresia-evento')->group(function () {
@@ -90,6 +92,6 @@ Route::middleware(['auth'])->group(function(){
             Route::prefix('eventos')->group(function () {
                 Route::get('get-data', [RelatorioEventosController::class, 'getRelatorioEventosData']);
             });
-
+            Route::get('frequencia/membro-visitante/get-data', [MembresiaEventosController::class, 'getRelatorioFrequencia']);
         });
 });

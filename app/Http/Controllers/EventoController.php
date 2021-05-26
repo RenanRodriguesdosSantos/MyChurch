@@ -95,4 +95,8 @@ class EventoController extends Controller
     {
         return EventoStatus::all();
     }
+    public function getEventoByDate(Request $request)
+    {
+        return Evento::whereDate('data', $request->data)->get();
+    }
 }

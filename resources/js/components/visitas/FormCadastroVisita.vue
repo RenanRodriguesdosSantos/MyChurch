@@ -54,6 +54,16 @@
             ></v-text-field>
           </v-col>
           <v-col lg="6" md="6" cols="12">
+            <v-autocomplete
+              item-text="nome"
+              item-value="id"
+              :items="membros"
+              label="Membro visitado"
+              v-model="visita.membro_visitado_id"
+              outlined
+            ></v-autocomplete>
+          </v-col>
+          <v-col lg="6" md="6" cols="12">
             <v-textarea
               label="Descrição da visita"
               type="text"
@@ -80,6 +90,7 @@
 <script>
 import UsuarioService from "../usuario/UsuarioService";
 import VisitaService from "./VisitaService";
+import MembresiaService from "../membresia/MembresiaService"
 import moment from "moment";
 
 export default {
@@ -89,6 +100,7 @@ export default {
     return {
       usuarioService: new UsuarioService(),
       visitaService: new VisitaService(),
+      membresiaService: new MembresiaService(),
       visita: {
         data_visita: null,
         data: null,
@@ -96,8 +108,10 @@ export default {
         endereco: null,
         descricao: null,
         responsavel_id: null,
+        membro_visitado_id: null,
       },
       usuarios: [],
+      membros: [],
       isLoading: null,
       requiredRule: [(v) => !!v || "Este campo é obrigatório."],
     };
@@ -137,6 +151,15 @@ export default {
           this.isLoading = false;
         });
     },
+    async fetchMembros() {
+      this.isLoading = true;
+      await this.membresiaService
+        .request("GET", "get-all-membros")
+        .then((response) => {
+          this.membros = response.data;
+          this.isLoading = false;
+        });
+    },
     clearFields() {
       this.visita = {
         data_visita: null,
@@ -168,6 +191,7 @@ export default {
   },
   mounted() {
     this.fetchUsuarios();
+    this.fetchMembros();
     this.clearFields();
     if (this.id) {
       this.loadVisita();

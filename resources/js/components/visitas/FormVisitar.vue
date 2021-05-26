@@ -15,17 +15,20 @@
       </v-row>
       <v-row>
         <v-col cols="12">
-          <v-flex>
+          <v-flex mb-1>
             Criado por: <b>{{ visita.criadoPor }}</b>
           </v-flex>
-          <v-flex>
+          <v-flex mb-1>
             Data e Hora: <b>{{ dataVisita }}</b>
           </v-flex>
-          <v-flex>
+          <v-flex mb-1>
             Descrição: <b>{{ visita.descricao }}</b>
           </v-flex>
-          <v-flex>
+          <v-flex mb-1>
             Endereço: <b>{{ visita.endereco }}</b>
+          </v-flex>
+          <v-flex mb-1 v-if="visita.membro_visitado">
+            Membro visitado: <b>{{ visita.membro_visitado.nome }}</b>
           </v-flex>
           <v-form ref="visitarForm">
             <v-row class="text-lg-center">

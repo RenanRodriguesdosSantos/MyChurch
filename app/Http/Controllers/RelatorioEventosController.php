@@ -32,7 +32,7 @@ class RelatorioEventosController extends Controller
                 $obj_evento->participantes_visitantes = $evento->participantes->where('membro.tipo', 2)->count();
                 $obj_evento->total_membros = $this->getTotalMembrosEvento($evento->id, 1);
                 $obj_evento->frequencia = $obj_evento->participantes_membros / $obj_evento->total_membros * 100;
-    
+
                 $eventos_collect->push($obj_evento);
             }
             $return->eventos = $eventos_collect->sortBy('data')->values();
@@ -43,11 +43,13 @@ class RelatorioEventosController extends Controller
 
     public function getTotalMembrosEvento($evento_id, $tipo=null)
     {
-        $membros_evento = Membresia::where('created_at', '<=', Evento::find($evento_id)->data);
+        $membros_evento = Membresia::whereDate('created_at', '<=', Evento::find($evento_id)->data);
 
         if($tipo)
             $membros_evento = $membros_evento->where('tipo', $tipo);
 
         return $membros_evento->count();
     }
+
+
 }
