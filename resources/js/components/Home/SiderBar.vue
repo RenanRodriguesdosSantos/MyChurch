@@ -131,11 +131,6 @@
                         <v-list-item-title>Eventos</v-list-item-title>
                     </v-list-item-content>
                 </v-list-item>
-                <v-list-item link @click="goTo('listar-visitas')">
-                    <v-list-item-content>
-                        <v-list-item-title>Membros/Visitantes</v-list-item-title>
-                    </v-list-item-content>
-                </v-list-item>
             </v-list-group>
             <v-list-group :value="false" no-action prepend-icon="mdi-window-open-variant" v-if="checkForUserRole(['lider','obreiro'])">
                 <template v-slot:activator>

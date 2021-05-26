@@ -14,7 +14,11 @@ import ListarVisitas from '../components/visitas/ListarVisitas';
 import ListarEvento from '../components/evento/ListarEvento';
 import ChecklistEvento from '../components/evento/ChecklistEvento';
 import RelatorioEventos from '../components/relatorios/RelatorioEventos';
+<<<<<<< HEAD
+import RelatorioMembrosVisitantes from '../components/relatorios/RelatorioMembrosVisitantes';
+=======
 import BuscarEventosPorteiro from '../components/porteiro/BuscarEventosPorteiro';
+>>>>>>> de9a65dc643beeb959b01dd90eb0295fa94e7181
 
 Vue.use(Router);
 
@@ -126,9 +130,15 @@ const routes = [
     props: true
   },
   {
+<<<<<<< HEAD
+    path: '/relatorio/frequencia/membrovisitante/:id',
+    name: 'frequencia-membro-visitante',
+    component: RelatorioMembrosVisitantes,
+=======
     path: '/buscar-eventos',
     name: 'buscar-eventos',
     component: BuscarEventosPorteiro,
+>>>>>>> de9a65dc643beeb959b01dd90eb0295fa94e7181
     props: true
   }
 ];
