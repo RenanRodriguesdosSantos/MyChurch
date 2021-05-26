@@ -9,7 +9,7 @@
       </v-overlay>
     <v-form ref="dataForm">
         <v-row class="text-lg-center">
-            <v-col lg="10" md="10" cols="10">
+            <v-col lg="8" md="8" cols="8">
                 <v-text-field label="Nome completo" type="date" v-model="data" outlined :rules="[...requiredRule]">
 
                 </v-text-field>

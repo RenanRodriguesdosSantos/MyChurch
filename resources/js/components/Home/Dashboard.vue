@@ -36,6 +36,11 @@
                 <visita-por-mes class="charts-size" v-if="visitasPorMes" :visitasPorMes="visitasPorMes">
                 </visita-por-mes>
             </v-col>
+
+            <v-col lg="5" md="5" cols="12" class="chart-item">
+                <ultimos-eventos class="charts-size" v-if="visitasPorMes" :eventos="eventos.eventos">
+                </ultimos-eventos>
+            </v-col>
         </v-row>
 
     </v-layout>
@@ -47,6 +52,7 @@
 import CestaPorMes from '../charts/CestaPorMes.vue'
 import VisitaPorMes from '../charts/VisitasPorMes'
 import TotalDeVisitas from '../charts/TotalDeVisitas.vue'
+import UltimosEventos from '../charts/UltimosEventos.vue'
 import DashboardService from './DashboardService';
 import moment from 'moment'
 // import { map } from 'lodash';
@@ -55,6 +61,7 @@ export default {
         CestaPorMes,
         TotalDeVisitas,
         VisitaPorMes,
+        UltimosEventos,
     },
     name: 'Dashboard',
     data() {
@@ -65,6 +72,7 @@ export default {
             totalVisitas: 0,
             visitasPorMes: 0,
             cestaBasicas: 0,
+            eventos: 0,
             months: [
                 { value: 1, nome: "Janeiro" },
                 { value: 2, nome: "Fevereiro" },
@@ -92,6 +100,7 @@ export default {
                 this.cestaBasicas = response.data['cestaBasicas'];
                 this.visitasPorMes = response.data['visitasPorMes'];
                 this.totalVisitas = response.data['totalVisitas'];
+                this.eventos = response.data['relatorioEventos'];
                 this.isLoading = false;
                 // console.log(this.totalVisitas.map(item => item.month));
             });
