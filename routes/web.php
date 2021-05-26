@@ -1,12 +1,16 @@
 <?php
 
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MembresiaController;
 use App\Http\Controllers\VisitanteController;
 use App\Http\Controllers\TiposController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VisitasController;
 use App\Http\Controllers\EventoController;
+use App\Http\Controllers\MembresiaEventosController;
+use App\Http\Controllers\MembresiaVisitasController;
+use App\Http\Controllers\RelatorioEventosController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -33,9 +37,10 @@ Route::middleware(['auth'])->group(function(){
         });
         Route::prefix('membresia')->group(function () {
             Route::post('cadastro', [MembresiaController::class, 'store']);
-            Route::get('get-all-membros', [MembresiaController::class, 'index']);
+            Route::get('get-membros', [MembresiaController::class, 'index']);
             Route::get('get-membro', [MembresiaController::class, 'show']);
             Route::post('delete-membro', [MembresiaController::class, 'destroy']);
+            Route::get('get-all-membros', [MembresiaController::class, 'getAllMembros']);
         });
 
         Route::prefix('user')->group(function () {
@@ -70,6 +75,24 @@ Route::middleware(['auth'])->group(function(){
             Route::get('get-all-eventos', [EventoController::class, 'index']);
             Route::get('get-evento', [EventoController::class, 'show']);
             Route::post('delete-evento', [EventoController::class, 'destroy']);
+            Route::post('finish-evento', [EventoController::class, 'finish']);
+            Route::get('get-evento-by-date', [EventoController::class, 'getEventoByDate']);
 
+        });
+        Route::prefix('membresia-evento')->group(function () {
+            Route::post('add-membro-to-evento', [MembresiaEventosController::class, 'addMembroEvento']);
+            Route::post('remove-membro-from-evento', [MembresiaEventosController::class, 'removeMembroEvento']);
+            Route::get('get-all-membros', [MembresiaEventosController::class, 'getAllMembrosInEventos']);
+        });
+        Route::prefix('dashboard')->group(function () {
+            Route::get('get-dashboard-data', [DashboardController::class, 'getDashboardData']);
+        });
+
+        Route::prefix('relatorios')->group(function () {
+
+            Route::prefix('eventos')->group(function () {
+                Route::get('get-data', [RelatorioEventosController::class, 'getRelatorioEventosData']);
+            });
+            Route::get('frequencia/membro-visitante/get-data', [MembresiaEventosController::class, 'getRelatorioFrequencia']);
         });
 });

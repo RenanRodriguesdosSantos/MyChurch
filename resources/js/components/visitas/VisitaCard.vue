@@ -1,7 +1,7 @@
 <template>
     <div style="height: 100%">
-        <v-card style="height: 100%" class="card-border" :style="{ 'border-top-color' :statusColor }" elevation="5">
-            <v-card-text>
+        <v-card style="height: 100%" class="card-border card-column" :style="{ 'border-top-color' :statusColor }" elevation="5">
+            <v-card-text class="grow">
                 <v-layout column>
                     <v-flex xs6 class="mb-2">
                         Criado por: <b>{{visita.criado_por.name}}</b>
@@ -18,21 +18,19 @@
                     <v-flex xs12 class="mb-2 descricao-text">
                         Endereço: {{visita.endereco}}
                     </v-flex>
-                    <!-- <v-flex xs12  class="mb-2">
-                        Status: <b :style="{ 'color' :statusColor }">{{visita.status.descricao}}</b>
-                    </v-flex> -->
 
                 </v-layout>
 
             </v-card-text>
-            <v-card-actions class="pb-2 text-center">
+
+            <v-card-actions class="pb-2 text-center vcard-actions" >
                 <!-- <span class="justify-center">Editar</span> -->
-                <v-layout row class="mb-1">
-                    <v-flex class="mouse-cursor mb-2" v-if="visita.criado_por.id == currentUser.id" @click="editItem(visita.id)" xs6>
+                <v-layout row class="mb-1" >
+                    <v-flex class="mouse-cursor mb-3" v-if="visita.criado_por.id == currentUser.id" @click="editItem(visita.id)" xs6>
                         Editar <v-icon small>mdi-pencil</v-icon>
                     </v-flex>
                         <v-divider vertical v-if="visita.criado_por.id == currentUser.id"></v-divider>
-                    <v-flex class="mouse-cursor mb-2" v-if="visita.criado_por.id == currentUser.id"  @click="deleteItem(visita.id)" xs6>
+                    <v-flex class="mouse-cursor mb-3" v-if="visita.criado_por.id == currentUser.id"  @click="deleteItem(visita.id)" xs6>
                         Excluir <v-icon small>mdi-delete</v-icon>
                     </v-flex>
                     <v-flex class="mouse-cursor" @click="confirmarVisita(visita.id)" xs12>
@@ -147,6 +145,12 @@ export default {
 .mouse-cursor {
     cursor: pointer;
 }
-
+.card-column {
+    display: flex;
+    flex-direction: column;
+}
+.vcard-actions {
+    justify-self: end;
+}
 </style>
 

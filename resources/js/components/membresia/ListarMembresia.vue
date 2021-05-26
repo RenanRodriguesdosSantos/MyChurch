@@ -45,9 +45,16 @@
                             </v-icon>
                             <v-icon
                                 small
+                                class="mr-2"
                                 @click="deleteItem(item)"
                             >
                                 mdi-delete
+                            </v-icon>
+                            <v-icon
+                                small
+                                @click="relatorio(item)"
+                            >
+                                mdi-file-chart
                             </v-icon>
                         </template>
                     </v-data-table>
@@ -99,7 +106,7 @@ export default {
     methods: {
         async fetchMembros() {
             this.isLoading = true;
-            await this.membresiaService.request('GET', 'get-all-membros').then((response) => {
+            await this.membresiaService.request('GET', 'get-membros').then((response) => {
                 this.items = response.data;
                 this.isLoading = false;
             });
@@ -127,7 +134,11 @@ export default {
             this.deletedItem = item;
             this.dialogDelete = true
         },
-
+        relatorio(item) {
+            this.$router.push({ name: 'frequencia-membro-visitante', params: {
+                id: item.id,
+            }});
+        },
         async deleteItemConfirm () {
             await this.deleteMembro();
             this.closeDelete();

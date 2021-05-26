@@ -12,6 +12,12 @@ import FormCadastroVisita from '../components/visitas/FormCadastroVisita';
 import FormVisitar from '../components/visitas/FormVisitar';
 import ListarVisitas from '../components/visitas/ListarVisitas';
 import ListarEvento from '../components/evento/ListarEvento';
+import ChecklistEvento from '../components/evento/ChecklistEvento';
+import RelatorioEventos from '../components/relatorios/RelatorioEventos';
+
+import RelatorioMembrosVisitantes from '../components/relatorios/RelatorioMembrosVisitantes';
+
+import BuscarEventosPorteiro from '../components/porteiro/BuscarEventosPorteiro';
 
 Vue.use(Router);
 
@@ -108,6 +114,30 @@ const routes = [
     path: '/visita/realizar/:id',
     name: 'realizar-visita',
     component: FormVisitar,
+    props: true
+  },
+  {
+    path: '/evento/:id/checklist',
+    name: 'checklist-evento',
+    component: ChecklistEvento,
+    props: true
+  },
+  {
+    path: '/relatorios/eventos',
+    name: 'relatorio-eventos',
+    component: RelatorioEventos,
+    props: true
+  },
+  {
+    path: '/relatorio/frequencia/membrovisitante/:id',
+    name: 'frequencia-membro-visitante',
+    component: RelatorioMembrosVisitantes,
+    props: true
+  },
+  {
+    path: '/buscar-eventos',
+    name: 'buscar-eventos',
+    component: BuscarEventosPorteiro,
     props: true
   }
 ];

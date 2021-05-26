@@ -15,17 +15,20 @@
       </v-row>
       <v-row>
         <v-col cols="12">
-          <v-flex>
+          <v-flex mb-1>
             Criado por: <b>{{ visita.criadoPor }}</b>
           </v-flex>
-          <v-flex>
+          <v-flex mb-1>
             Data e Hora: <b>{{ dataVisita }}</b>
           </v-flex>
-          <v-flex>
+          <v-flex mb-1>
             Descrição: <b>{{ visita.descricao }}</b>
           </v-flex>
-          <v-flex>
+          <v-flex mb-1>
             Endereço: <b>{{ visita.endereco }}</b>
+          </v-flex>
+          <v-flex mb-1 v-if="visita.membro_visitado">
+            Membro visitado: <b>{{ visita.membro_visitado.nome }}</b>
           </v-flex>
           <v-form ref="visitarForm">
             <v-row class="text-lg-center">
@@ -64,6 +67,21 @@
                   </template>
                 </v-autocomplete>
               </v-col>
+
+            </v-row>
+            <v-row>
+                <v-col cols="12" lg="6" md="6">
+                    <v-checkbox label="Teve doação de cestas básicas ?" v-model="cestaBasicas"></v-checkbox>
+                </v-col>
+                <v-col cols="12" lg="6" md="6">
+                    <v-text-field
+                        type="number"
+                        v-if="cestaBasicas"
+                        label="Quantidade"
+                        outlined
+                        v-model="visita.qtde_cesta_basicas"
+                    ></v-text-field>
+                </v-col>
             </v-row>
           </v-form>
         </v-col>
@@ -93,11 +111,13 @@ export default {
       usuarioService: new UsuarioService(),
       visita: {
         observacao: null,
+        qtde_cesta_basicas: 0,
       },
       isLoading: false,
       requiredRule: [(v) => !!v || "Este campo é obrigatório."],
       usuarios: [],
       participantes: [],
+      cestaBasicas: false,
     };
   },
   methods: {

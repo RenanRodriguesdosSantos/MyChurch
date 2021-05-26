@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\EventoStatus;
 use App\Models\User;
+use App\Models\MembresiaEventos;
 
 class Evento extends Model
 {
@@ -40,5 +41,9 @@ class Evento extends Model
 
     public function getUserNomeAttribute(){
         return  $this->user->name;
+    }
+
+    public function participantes(){ 
+        return $this->hasMany(MembresiaEventos::class,'evento_id'); 
     }
 }

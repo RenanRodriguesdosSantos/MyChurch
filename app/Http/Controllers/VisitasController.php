@@ -53,12 +53,14 @@ class VisitasController extends Controller
             'criado_por' => Auth::user()->id,
             'responsavel' => $request->responsavel_id,
             'data_visita' => $request->data_visita,
+            'data_visita' => $request->data_visita,
+            'membro_visitado' => $request->membro_visitado_id,
             'endereco' => $request->endereco,
             'descricao' => $request->descricao,
             'status_id' => StatusVisitas::where('slug','agendada')->first()->id
         ]);
     }
- 
+
     /**
      * Display the specified resource.
      *
@@ -67,7 +69,7 @@ class VisitasController extends Controller
      */
     public function show(Request $request)
     {
-        return Visita::with('criadoPor')->find($request->id);
+        return Visita::with(['criadoPor', 'membroVisitado'])->find($request->id);
     }
 
     /**
@@ -112,11 +114,12 @@ class VisitasController extends Controller
             }
 
             DB::insert("insert into visita_participante(visita_id,participante_id) values $valores");
-        
+
             Visita::find($request->id)->update([
                 'observacao' => $request->observacao,
+                'qtde_cesta_basicas' => $request->qtde_cesta_basicas,
                 'status_id' => StatusVisitas::where('slug','realizada')->first()->id,
-                'data_realizada' => date('yyyy-mm-dd')
+                'data_realizada' => now()
             ]);
         });
     }

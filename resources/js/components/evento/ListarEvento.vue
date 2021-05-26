@@ -33,23 +33,51 @@
                                 day: 'numeric',
                                 hour: 'numeric',
                                 minute: 'numeric',
-                            }) 
-                                
+                            })
+
                                 }}</span>
                         </template>
-                        <template v-slot:item.acoes="{ item }">
+                        <template v-if="currentUser.tipo.slug !== 'porteiro'" v-slot:item.acoes="{ item }">
                             <v-icon
                                 small
                                 class="mr-2"
                                 @click="editItem(item)"
+                                
                             >
                                 mdi-pencil
                             </v-icon>
                             <v-icon
                                 small
                                 @click="deleteItem(item)"
+                                title="Excluir Evento"
                             >
                                 mdi-delete
+                            </v-icon>
+                            <v-icon
+                                small
+                                class="mr-2"
+                                @click="goToChecklist(item.id)"
+                                 title="Lista de Presença"
+                            >
+                                mdi-playlist-check
+                            </v-icon>
+                            <v-icon v-if="item.evento_status_id == 2"
+                                small
+                                class="mr-2"
+                                @click="finishItem(item.id)"
+                                title="Realizar Evento"
+                            >
+                                mdi-clipboard-check
+                            </v-icon>
+
+                        </template>
+                        <template v-else v-slot:item.acoes="{ item }">
+                            <v-icon
+                                small
+                                class="mr-2"
+                                @click="goToChecklist(item.id)"
+                            >
+                                mdi-playlist-check
                             </v-icon>
                         </template>
                     </v-data-table>
@@ -67,11 +95,23 @@
             </v-card-actions>
           </v-card>
         </v-dialog>
+        <v-dialog v-model="dialogFinish" persistent max-width="600px">
+          <v-card>
+            <v-card-title class="headline">Tem certeza que deseja realizar este evento?</v-card-title>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn color="error" text @click="closeFinish">Cancelar</v-btn>
+              <v-btn color="success" text @click="finishItemConfirm">OK</v-btn>
+              <v-spacer></v-spacer>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
   </div>
 </template>
 
 <script>
 import EventoService from './EventoService';
+import {mapGetters} from 'vuex';
 
 export default {
     name: 'listar-evento',
@@ -89,11 +129,21 @@ export default {
             ],
             deletedItem: null,
             dialogDelete: false,
+            dialogFinish: false,
+            finishedItem : null,
         };
+    },
+    computed: {
+        ...mapGetters({
+            currentUser: "GET_CURRENT_USER",
+        })
     },
     watch: {
         dialogDelete (val) {
             val || this.closeDelete()
+        },
+        dialogFinish (val) {
+            val || this.closeFinish()
         },
     },
     methods: {
@@ -118,6 +168,20 @@ export default {
                 this.isLoading = false;
             });
         },
+        async finishEvento() {
+            this.isLoading = true;
+            const params = {
+                id: this.finishedItem
+            }
+            await this.eventoService.request('POST', 'finish-evento', params).then((response) => {
+                if(response.status >= 200 && response.status <= 299) {
+                    Vue.$toast.success('Operação realizada com sucesso');
+                } else {
+                    Vue.$toast.error('Ocorreu um problema ao realizar o evento');
+                }
+                this.isLoading = false;
+            });
+        },
         editItem(item) {
             this.$router.push({ name: 'editar-evento', params: {
                 id: item.id,
@@ -127,15 +191,33 @@ export default {
             this.deletedItem = item;
             this.dialogDelete = true
         },
+        finishItem (item) {
+            this.finishedItem = item;
+            this.dialogFinish = true
+        },
 
         async deleteItemConfirm () {
             await this.deleteEvento();
             this.closeDelete();
             await this.fetchEventos();
         },
+        async finishItemConfirm () {
+            await this.finishEvento();
+            this.closeFinish();
+            await this.fetchEventos();
+        },
+        goToChecklist(id) {
+            this.$router.push({ name: 'checklist-evento', params: {
+                id
+            }});
+        },
         closeDelete () {
             this.dialogDelete = false;
             this.deletedItem = null
+        },
+        closeFinish () {
+            this.dialogFinish = false;
+            this.finishedItem = null
         },
     },
     mounted() {
