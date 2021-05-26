@@ -87,6 +87,6 @@ class MembresiaEventosController extends Controller
             $evento->presente = in_array($evento->id , $eventosMembro);
             $collection->push($evento);
         }
-        return ["membro" => $membro, "eventos" => $collection, "visitas" => $visitas[0]];
+        return  ["membro" => $membro, "eventos" => $collection, "visitas" => $visitas[0]];
     }
 }
