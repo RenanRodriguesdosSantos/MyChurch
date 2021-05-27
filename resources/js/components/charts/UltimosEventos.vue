@@ -16,7 +16,7 @@ export default {
         datasets: [
             {
                 label: 'Frequencia ultimos eventos',
-                backgroundColor: '#303D46',
+                backgroundColor: '#ff0000',
                 data: this.eventos.map(item => item.frequencia)
             }
         ]
