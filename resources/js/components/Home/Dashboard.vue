@@ -68,7 +68,7 @@ export default {
         return {
             dashboardService: new DashboardService(),
             isLoading: false,
-            selectedMonth: moment().month(),
+            selectedMonth: 5,
             totalVisitas: 0,
             visitasPorMes: 0,
             cestaBasicas: 0,

@@ -51,14 +51,13 @@
                             >
                                 mdi-delete
                             </v-icon>
-                            <v-icon
+                            <v-icon v-if="item.status_nome === 'Não realizado'"
                                 small
                                 class="mr-2"
                                 @click="finalizarEvento(item.id)"
                             >
-                                mdi-playlist-check
+                                mdi-check
                             </v-icon>
-
                         </template>
                         <template v-else v-slot:item.acoes="{ item }">
                             <v-icon
@@ -158,16 +157,15 @@ export default {
         },
         async finalizarEvento(id) {
             this.isLoading = true;
-            const params = {
-                id: this.deletedItem.id
-            }
-            await this.eventoService.request('POST', 'finalizar-evento', params).then((response) => {
+
+            await this.eventoService.request('PUT', 'finalizar-evento', { id }).then((response) => {
                 if(response.status >= 200 && response.status <= 299) {
                     Vue.$toast.success('Operação realizada com sucesso');
                 } else {
                     Vue.$toast.error('Ocorreu um problema ao atualizar o registro');
                 }
                 this.isLoading = false;
+                this.fetchEventos();
             });
         },
         closeDelete () {

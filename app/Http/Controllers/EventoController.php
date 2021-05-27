@@ -97,7 +97,8 @@ class EventoController extends Controller
     }
     public function getEventoByDate(Request $request)
     {
-        return Evento::whereDate('data', $request->data)->get();
+        $evento_status_id = EventoStatus::where('nome', 'Não realizado')->first()->id;
+        return Evento::whereDate('data', $request->data)->where('evento_status_id', $evento_status_id)->get();
     }
 
     public function finalizarEvento(Request $request)

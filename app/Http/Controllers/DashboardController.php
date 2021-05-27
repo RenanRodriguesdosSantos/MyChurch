@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Evento;
+use App\Models\EventoStatus;
 use App\Models\Membresia;
 use App\Models\Visita;
 use Illuminate\Http\Request;
@@ -62,7 +63,9 @@ class DashboardController extends Controller
     public function getRelatorioEventoTop5()
     {
         $return = new class{};
-        $eventos = Evento::with('participantes')->where('evento_status_id', 1)->orderBy('data', 'DESC')->get()->take(5); //eventos realizados
+        $evento_status_id = EventoStatus::where('nome', 'Realizado')->first()->id;
+        $eventos = Evento::with('participantes')->where('evento_status_id', 1)->where('evento_status_id', $evento_status_id)
+        ->orderBy('data', 'DESC')->get()->take(5); //eventos realizados
 
         if($eventos->isNotEmpty()){
             $eventos_collect = collect();
