@@ -99,4 +99,12 @@ class EventoController extends Controller
     {
         return Evento::whereDate('data', $request->data)->get();
     }
+
+    public function finalizarEvento(Request $request)
+    {
+
+        $evento = Evento::find($request->id);
+        $evento->evento_status_id = EventoStatus::where('nome', 'Realizado')->first()->id;
+        return  $evento->save();
+    }
 }

@@ -76,7 +76,7 @@ Route::middleware(['auth'])->group(function(){
             Route::get('get-evento', [EventoController::class, 'show']);
             Route::post('delete-evento', [EventoController::class, 'destroy']);
             Route::get('get-evento-by-date', [EventoController::class, 'getEventoByDate']);
-
+            Route::put('finalizar-evento', [EventoController::class, 'finalizarEvento']);
         });
         Route::prefix('membresia-evento')->group(function () {
             Route::post('add-membro-to-evento', [MembresiaEventosController::class, 'addMembroEvento']);

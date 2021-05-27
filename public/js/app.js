@@ -2097,6 +2097,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./store */ "./resources/js/store/index.js");
 /* harmony import */ var _router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./router */ "./resources/js/router/index.js");
+/* harmony import */ var _router__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_router__WEBPACK_IMPORTED_MODULE_1__);
 
  // import plugins from './plugins';
 // Propriedades que vão ser injetadas:
@@ -2105,7 +2106,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   store: _store__WEBPACK_IMPORTED_MODULE_0__.default,
-  router: _router__WEBPACK_IMPORTED_MODULE_1__.default // plugins,
+  router: (_router__WEBPACK_IMPORTED_MODULE_1___default()) // plugins,
 
 });
 

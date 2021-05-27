@@ -10,7 +10,7 @@
             </v-overlay>
             <v-row class="mb-6">
                 <v-col lg="12" md="12" sm="12">
-                    <h3>Frequência do {{membro.tipo == '1'?"Membro":"Visitante"}}</h3>
+                    <h3>Frequência do {{ membro.tipo == '1'? "Membro":"Visitante"}} </h3>
                 </v-col>
             </v-row>
             <v-row>
@@ -85,7 +85,7 @@
                 </v-col>
             </v-row>
 
-           
+
 
         </v-container>
   </div>
@@ -109,14 +109,7 @@ export default {
             data_fim: null,
         };
     },
-    watch: {
-     
-    },
-    computed: {
-  
-    },
     methods: {
-
         async fetchRelDada() {
             this.isLoading = true;
             await this.RelatorioEventosService.request('GET', 'get-data', null, {

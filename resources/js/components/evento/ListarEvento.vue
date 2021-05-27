@@ -54,7 +54,7 @@
                             <v-icon
                                 small
                                 class="mr-2"
-                                @click="goToChecklist(item.id)"
+                                @click="finalizarEvento(item.id)"
                             >
                                 mdi-playlist-check
                             </v-icon>
@@ -156,10 +156,19 @@ export default {
             this.closeDelete();
             await this.fetchEventos();
         },
-        goToChecklist(id) {
-            this.$router.push({ name: 'checklist-evento', params: {
-                id
-            }});
+        async finalizarEvento(id) {
+            this.isLoading = true;
+            const params = {
+                id: this.deletedItem.id
+            }
+            await this.eventoService.request('POST', 'finalizar-evento', params).then((response) => {
+                if(response.status >= 200 && response.status <= 299) {
+                    Vue.$toast.success('Operação realizada com sucesso');
+                } else {
+                    Vue.$toast.error('Ocorreu um problema ao atualizar o registro');
+                }
+                this.isLoading = false;
+            });
         },
         closeDelete () {
             this.dialogDelete = false;

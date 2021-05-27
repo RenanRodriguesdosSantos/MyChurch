@@ -12,14 +12,14 @@ export default {
   data() {
     return {
         chartdata: {
-        labels: this.cestaPorMes.map(item => item.month),
-        datasets: [
-            {
-                label: 'Cestas básicas',
-                backgroundColor: '#303D46',
-                data: this.cestaPorMes.map(item => item.qtde)
-            }
-        ]
+            labels: this.cestaPorMes.map(item => item.month),
+            datasets: [
+                {
+                    label: 'Cestas básicas',
+                    backgroundColor: '#303D46',
+                    data: this.cestaPorMes.map(item => item.qtde)
+                }
+            ]
         },
         options: {
             responsive: true,
