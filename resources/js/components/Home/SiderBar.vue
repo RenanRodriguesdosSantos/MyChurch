@@ -65,7 +65,7 @@
                     </v-list-item-content>
                 </v-list-item>
             </v-list-group>
-            <v-list-group :value="false" no-action prepend-icon="mdi-calendar-today" >
+            <v-list-group :value="false" no-action prepend-icon="mdi-calendar-today" v-if="checkForUserRole(['lider','obreiro'])">
 
                 <template v-slot:activator>
                 <v-list-item-content>
@@ -73,12 +73,12 @@
                 </v-list-item-content>
                 </template>
 
-                <v-list-item v-if="checkForUserRole(['lider'])" link @click="goTo('cadastro-evento')">
+                <v-list-item link @click="goTo('cadastro-evento')">
                     <v-list-item-content>
                         <v-list-item-title>Novo evento</v-list-item-title>
                     </v-list-item-content>
                 </v-list-item>
-                <v-list-item v-if="checkForUserRole(['lider','porteiro'])" link @click="goTo('listar-evento')">
+                <v-list-item  link @click="goTo('listar-evento')">
                     <v-list-item-content>
                         <v-list-item-title>Lista de eventos</v-list-item-title>
                     </v-list-item-content>
@@ -120,7 +120,7 @@
                     </v-list-item-content>
                 </v-list-item>
             </v-list-group>
-            <v-list-group :value="false" no-action prepend-icon="mdi-text-box-search" v-if="checkForUserRole(['lider','obreiro'])">
+            <v-list-group :value="false" no-action prepend-icon="mdi-text-box-search" v-if="checkForUserRole(['lider'])">
                 <template v-slot:activator>
                 <v-list-item-content>
                     <v-list-item-title >Relatórios</v-list-item-title>
@@ -132,7 +132,7 @@
                     </v-list-item-content>
                 </v-list-item>
             </v-list-group>
-            <v-list-group :value="false" no-action prepend-icon="mdi-window-open-variant" v-if="checkForUserRole(['lider','obreiro'])">
+            <v-list-group :value="false" no-action prepend-icon="mdi-window-open-variant" v-if="checkForUserRole(['lider','porteio'])">
                 <template v-slot:activator>
                 <v-list-item-content>
                     <v-list-item-title >Porteiro</v-list-item-title>
